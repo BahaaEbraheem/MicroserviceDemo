@@ -50,13 +50,13 @@ public class RemittanceAppService : RemittanceManagementAppService ,IRemittanceA
     //private readonly ICurrencyRepository _currencyAppService;
     private readonly ICurrencyAppService _currencyAppService;
     private readonly ICustomerAppService _customerAppService;
-    private readonly IRepository<RemittanceStatus, Guid> _remittanceStatusRepository;
+    private readonly IRemittanceStatusRepository _remittanceStatusRepository;
     //private readonly IRepository<IdentityUser, Guid> _userRepository;
     //private readonly IdentityUserManager _identityUserManager;
     public RemittanceAppService(
         //IdentityUserManager identityUserManager,
         ICustomerAppService customerAppService,
-        IRepository<RemittanceStatus, Guid> remittanceStatusRepository,
+        IRemittanceStatusRepository remittanceStatusRepository,
         IRemittanceRepository remittanceRepository,
         IRemittanceStatusAppService remittanceStatusAppService,
         RemittanceManager remittanceManager,

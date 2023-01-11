@@ -10,7 +10,7 @@ using Volo.Abp.DependencyInjection;
 
 namespace CurrencyManagment.Currencies
 {
-    public interface ICurrencyAppService : IApplicationService,
+    public interface ICurrencyAppService : 
          ICrudAppService< //Defines CRUD methods
              CurrencyDto, //Used to show currencies
              Guid, //Primary key of the currency entity

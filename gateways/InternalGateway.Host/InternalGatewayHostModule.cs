@@ -25,6 +25,9 @@ using Volo.Abp.Security.Claims;
 using Volo.Abp.SettingManagement.EntityFrameworkCore;
 using Volo.Abp.TenantManagement;
 using Volo.Blogging;
+using CurrencyManagment;
+using CustomerManagement;
+using RemittanceManagement;
 
 namespace InternalGateway.Host
 {
@@ -37,7 +40,12 @@ namespace InternalGateway.Host
         typeof(AbpPermissionManagementEntityFrameworkCoreModule),
         typeof(AbpSettingManagementEntityFrameworkCoreModule),
         typeof(AbpTenantManagementHttpApiModule),
-        typeof(AbpAspNetCoreMultiTenancyModule)
+        typeof(AbpAspNetCoreMultiTenancyModule),
+                 typeof(RemittanceManagementHttpApiModule),
+        typeof(CurrencyManagmentHttpApiModule),
+        typeof(CustomerManagementHttpApiModule)
+
+
         )]
     public class InternalGatewayHostModule : AbpModule
     {

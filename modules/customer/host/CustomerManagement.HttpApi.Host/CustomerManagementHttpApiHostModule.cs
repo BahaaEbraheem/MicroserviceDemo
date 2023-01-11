@@ -95,10 +95,10 @@ public class CustomerManagementHttpApiHostModule : AbpModule
             options.UseSqlServer();
         });
 
-        context.Services.AddStackExchangeRedisCache(options =>
-        {
-            options.Configuration = configuration["Redis:Configuration"];
-        });
+        //context.Services.AddStackExchangeRedisCache(options =>
+        //{
+        //    options.Configuration = configuration["Redis:Configuration"];
+        //});
 
         Configure<AbpAuditingOptions>(options =>
         {
@@ -106,33 +106,33 @@ public class CustomerManagementHttpApiHostModule : AbpModule
             options.ApplicationName = "CustomerManagement";
         });
 
-        var redis = ConnectionMultiplexer.Connect(configuration["Redis:Configuration"]);
-        context.Services.AddDataProtection()
-            .PersistKeysToStackExchangeRedis(redis, "MsDemo-DataProtection-Keys");
+        //var redis = ConnectionMultiplexer.Connect(configuration["Redis:Configuration"]);
+        //context.Services.AddDataProtection()
+        //    .PersistKeysToStackExchangeRedis(redis, "MsDemo-DataProtection-Keys");
 
 
 
 
     
 
-    context.Services.AddCors(options =>
-        {
-            options.AddDefaultPolicy(builder =>
-            {
-                builder
-                    .WithOrigins(
-                        configuration["App:CorsOrigins"]
-                            .Split(",", StringSplitOptions.RemoveEmptyEntries)
-                            .Select(o => o.Trim().RemovePostFix("/"))
-                            .ToArray()
-                    )
-                    .WithAbpExposedHeaders()
-                    .SetIsOriginAllowedToAllowWildcardSubdomains()
-                    .AllowAnyHeader()
-                    .AllowAnyMethod()
-                    .AllowCredentials();
-            });
-        });
+    //context.Services.AddCors(options =>
+    //    {
+    //        options.AddDefaultPolicy(builder =>
+    //        {
+    //            builder
+    //                .WithOrigins(
+    //                    configuration["App:CorsOrigins"]
+    //                        .Split(",", StringSplitOptions.RemoveEmptyEntries)
+    //                        .Select(o => o.Trim().RemovePostFix("/"))
+    //                        .ToArray()
+    //                )
+    //                .WithAbpExposedHeaders()
+    //                .SetIsOriginAllowedToAllowWildcardSubdomains()
+    //                .AllowAnyHeader()
+    //                .AllowAnyMethod()
+    //                .AllowCredentials();
+    //        });
+    //    });
 
 
 
@@ -147,7 +147,7 @@ public class CustomerManagementHttpApiHostModule : AbpModule
         app.UseRouting();
         app.UseAuthentication();
         app.UseAbpClaimsMap();
-        app.UseCors();
+        //app.UseCors();
 
         if (MsDemoConsts.IsMultiTenancyEnabled)
         {

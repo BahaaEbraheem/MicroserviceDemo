@@ -12,7 +12,6 @@ using Microsoft.AspNetCore.Authorization;
 using AutoMapper;
 using Volo.Abp.ObjectMapping;
 using Volo.Abp.DependencyInjection;
-using AutoMapper.Internal.Mappers;
 using RemittanceManagement.Status.Dtos;
 using RemittanceManagement.Remittances;
 
@@ -27,18 +26,14 @@ namespace RemittanceManagement.Status
             CreateUpdateRemittanceStatusDto>, //Used to create/update a customer
         IRemittanceStatusAppService //implement the IcustomerAppService
     {
-        private readonly IRemittanceRepository _remittanceRepository;
-        private readonly IRemittanceStatusRepository _remittanceStatusRepository;
-        public RemittanceStatusAppService(IRepository<RemittanceStatus, Guid> repository,
-            IRemittanceRepository remittanceRepository,
-            IRemittanceStatusRepository remittanceStatusRepository)
-            : base(repository)
+        public RemittanceStatusAppService(IRemittanceStatusRepository Repository) :
+            base(Repository)
         {
-            _remittanceRepository = remittanceRepository;
-            _remittanceStatusRepository = remittanceStatusRepository;
+
         }
-  
-    }
+        
+        }
+    
 }
 
 

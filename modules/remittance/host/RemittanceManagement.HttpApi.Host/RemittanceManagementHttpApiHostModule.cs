@@ -105,34 +105,6 @@ public class RemittanceManagementHttpApiHostModule : AbpModule
             options.DocInclusionPredicate((docName, description) => true);
             options.CustomSchemaIds(type => type.FullName);
         });
-        //context.Services.Configure<AbpRemoteServiceOptions>(options =>
-        //{
-        //    options.RemoteServices.Default =
-        //        new RemoteServiceConfiguration(configuration["RemoteServices:Default:BaseUrl"]);
-        //});
-        //Configure<AbpDistributedCacheOptions>(options => { options.KeyPrefix = "RemittanceManagement:"; });
-
-
-        //context.Services.AddCors(options =>
-        //{
-        //    options.AddDefaultPolicy(builder =>
-        //    {
-        //        builder
-        //            .WithOrigins(
-        //                configuration["App:CorsOrigins"]
-        //                    .Split(",", StringSplitOptions.RemoveEmptyEntries)
-        //                    .Select(o => o.Trim().RemovePostFix("/"))
-        //                    .ToArray()
-        //            )
-        //            .WithAbpExposedHeaders()
-        //            .SetIsOriginAllowedToAllowWildcardSubdomains()
-        //            .AllowAnyHeader()
-        //            .AllowAnyMethod()
-        //            .AllowCredentials();
-        //    });
-        //});
-
-
 
 
         Configure<AbpLocalizationOptions>(options =>
@@ -145,10 +117,10 @@ public class RemittanceManagementHttpApiHostModule : AbpModule
             options.UseSqlServer();
         });
 
-        context.Services.AddStackExchangeRedisCache(options =>
-        {
-            options.Configuration = configuration["Redis:Configuration"];
-        });
+        //context.Services.AddStackExchangeRedisCache(options =>
+        //{
+        //    options.Configuration = configuration["Redis:Configuration"];
+        //});
 
         Configure<AbpAuditingOptions>(options =>
         {
@@ -156,9 +128,9 @@ public class RemittanceManagementHttpApiHostModule : AbpModule
             options.ApplicationName = "remittanceManagement";
         });
 
-        var redis = ConnectionMultiplexer.Connect(configuration["Redis:Configuration"]);
-        context.Services.AddDataProtection()
-            .PersistKeysToStackExchangeRedis(redis, "MsDemo-DataProtection-Keys");
+        //var redis = ConnectionMultiplexer.Connect(configuration["Redis:Configuration"]);
+        //context.Services.AddDataProtection()
+        //    .PersistKeysToStackExchangeRedis(redis, "MsDemo-DataProtection-Keys");
     }
 
     public override void OnApplicationInitialization(ApplicationInitializationContext context)

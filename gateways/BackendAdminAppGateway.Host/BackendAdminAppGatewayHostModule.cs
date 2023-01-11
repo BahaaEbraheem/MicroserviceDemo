@@ -34,6 +34,9 @@ using Volo.Abp.SettingManagement.EntityFrameworkCore;
 using Volo.Abp.TenantManagement;
 using Volo.Abp.TenantManagement.EntityFrameworkCore;
 using Volo.Blogging;
+using CurrencyManagment;
+using CustomerManagement;
+using RemittanceManagement;
 
 namespace BackendAdminAppGateway.Host
 {
@@ -58,7 +61,10 @@ namespace BackendAdminAppGateway.Host
         typeof(AbpFeatureManagementEntityFrameworkCoreModule),
         typeof(AbpFeatureManagementApplicationModule),
         typeof(AbpFeatureManagementHttpApiModule),
-        typeof(AbpAspNetCoreMvcUiMultiTenancyModule)
+        typeof(AbpAspNetCoreMvcUiMultiTenancyModule),
+         typeof(CurrencyManagmentHttpApiModule),
+         typeof(CustomerManagementHttpApiModule),
+         typeof(RemittanceManagementHttpApiModule)
     )]
     public class BackendAdminAppGatewayHostModule : AbpModule
     {

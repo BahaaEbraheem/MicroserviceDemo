@@ -7,7 +7,8 @@ using Volo.Abp.Application.Services;
 
 namespace RemittanceManagement.Status
 {
-    public interface IRemittanceStatusAppService : ICrudAppService< //Defines CRUD methods
+    public interface IRemittanceStatusAppService : 
+        ICrudAppService< //Defines CRUD methods
              RemittanceStatusDto, //Used to show currencies
              Guid, //Primary key of the currency entity
              RemittanceStatusPagedAndSortedResultRequestDto, //Used for paging/sorting

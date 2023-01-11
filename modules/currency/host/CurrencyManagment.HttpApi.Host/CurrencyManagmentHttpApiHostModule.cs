@@ -102,24 +102,6 @@ public class CurrencyManagmentHttpApiHostModule : AbpModule
         });
 
 
-
-        //context.Services.AddAbpSwaggerGenWithOAuth(
-        //          configuration["AuthServer:Authority"],
-        //          new Dictionary<string, string>
-        //          {
-        //              {"CurrencyManagment", "CurrencyManagment API"}
-        //          },
-        //          options =>
-        //          {
-        //              options.SwaggerDoc("v1", new OpenApiInfo { Title = "CurrencyManagment API", Version = "v1" });
-        //              options.DocInclusionPredicate((docName, description) => true);
-        //              options.CustomSchemaIds(type => type.FullName);
-        //          });
-
-
-
-
-
         context.Services.AddAuthentication("Bearer")
             .AddIdentityServerAuthentication(options =>
             {
@@ -146,10 +128,10 @@ public class CurrencyManagmentHttpApiHostModule : AbpModule
             options.UseSqlServer();
         });
 
-        context.Services.AddStackExchangeRedisCache(options =>
-        {
-            options.Configuration = configuration["Redis:Configuration"];
-        });
+        //context.Services.AddStackExchangeRedisCache(options =>
+        //{
+        //    options.Configuration = configuration["Redis:Configuration"];
+        //});
 
         Configure<AbpAuditingOptions>(options =>
         {
@@ -157,9 +139,9 @@ public class CurrencyManagmentHttpApiHostModule : AbpModule
             options.ApplicationName = "CurrencyManagment";
         });
 
-        var redis = ConnectionMultiplexer.Connect(configuration["Redis:Configuration"]);
-        context.Services.AddDataProtection()
-            .PersistKeysToStackExchangeRedis(redis, "MsDemo-DataProtection-Keys");
+        //var redis = ConnectionMultiplexer.Connect(configuration["Redis:Configuration"]);
+        //context.Services.AddDataProtection()
+        //    .PersistKeysToStackExchangeRedis(redis, "MsDemo-DataProtection-Keys");
     }
 
     public override void OnApplicationInitialization(ApplicationInitializationContext context)

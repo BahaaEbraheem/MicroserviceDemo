@@ -3,6 +3,7 @@ using RemittanceManagement.Remittances;
 using MsDemo.Shared.Dtos;
 using RemittanceManagement.Status;
 using RemittanceManagement.Status.Dtos;
+using static RemittanceManagement.Web.Pages.RemittanceManagement.CreateModel;
 
 namespace RemittanceManagement.Web;
 
@@ -21,6 +22,20 @@ public class RemittanceManagementWebAutoMapperProfile : Profile
                .ForMember(model => model.CreationTime, option => option.Ignore())
                .ForMember(model => model.LastModificationTime, option => option.Ignore());
 
+
+        CreateMap<RemittanceCreateViewModel, CreateRemittanceDto>()
+             .ForMember(model => model.SerialNumber, option => option.Ignore())
+              .ForMember(model => model.ApprovedBy, option => option.Ignore())
+               .ForMember(model => model.ApprovedDate, option => option.Ignore())
+               .ForMember(model => model.ReleasedBy, option => option.Ignore())
+               .ForMember(model => model.ReleasedDate, option => option.Ignore())
+               .ForMember(model => model.SenderName, option => option.Ignore())
+               .ForMember(model => model.ReceiverBy, option => option.Ignore())
+               .ForMember(model => model.ReceiverName, option => option.Ignore())
+               .ForMember(model => model.CurrencyName, option => option.Ignore())
+               .ForMember(model => model.State, option => option.Ignore())
+
+            ;
 
         CreateMap<CreateUpdateRemittanceStatusDto, RemittanceStatusDto>()
             .ForMember(model => model.Id, option => option.Ignore())

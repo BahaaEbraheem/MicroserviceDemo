@@ -35,8 +35,7 @@ public class CurrencyController : CurrencyManagmentController, ICurrencyAppServi
     }
 
     [HttpGet("GetListAsync")]
-
-    public virtual async Task<PagedResultDto<CurrencyDto>> GetListAsync( CurrencyPagedAndSortedResultRequestDto input)
+    public virtual async Task<PagedResultDto<CurrencyDto>> GetListAsync(CurrencyPagedAndSortedResultRequestDto input)
     {
         return await _currencyAppService.GetListAsync(input);
     }

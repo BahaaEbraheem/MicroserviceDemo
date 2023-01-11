@@ -38,11 +38,11 @@ namespace CurrencyManagment.Currencies
         private readonly ICurrencyRepository _currencyRepository;
         //private readonly IRemittanceAppService _remittanceAppService;
         private readonly CurrencyManager _currencyManager;
-        public CurrencyAppService(IRepository<Currency, Guid> repository,
+        public CurrencyAppService(
             ICurrencyRepository currencyRepository,
             //IRemittanceAppService remittanceAppService,
             CurrencyManager currencyManager)
-    : base(repository)
+    : base(currencyRepository)
         {
             _currencyRepository = currencyRepository;
             _currencyManager = currencyManager;

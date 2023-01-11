@@ -40,6 +40,11 @@ namespace RemittanceManagement.Status
             ));
         }
 
+        //public override Task InsertAsync(RemittanceStatus remittanceStatus)
+        //{
+        //    throw new NotImplementedException();
+        //}
+
         public  async Task<RemittanceStatus> UpdateAsync(Guid remittanceId)
         {
             Check.NotNullOrWhiteSpace(remittanceId.ToString(), nameof(remittanceId));

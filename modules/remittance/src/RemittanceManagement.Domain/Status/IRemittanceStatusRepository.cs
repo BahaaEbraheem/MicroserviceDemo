@@ -8,7 +8,7 @@ using Volo.Abp.Domain.Repositories;
 
 namespace RemittanceManagement.Status
 {
-    public interface IRemittanceStatusRepository : IRepository<RemittanceStatus, Guid>
+    public interface IRemittanceStatusRepository : IRepository<RemittanceStatus,Guid>
     {
         Task<RemittanceStatus> FindLastStateToThisRemitanceAsync(Guid remitanceId);
         Task<List<RemittanceStatus>> GetListAsync(

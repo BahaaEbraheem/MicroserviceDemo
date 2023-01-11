@@ -10,7 +10,6 @@ using Volo.Abp;
 using Volo.Abp.Application.Dtos;
 
 namespace CustomerManagement.Customers;
-[EnableCors]
 [Area(CustomerManagementRemoteServiceConsts.ModuleName)]
 [RemoteService(Name = CustomerManagementRemoteServiceConsts.RemoteServiceName)]
 [Route("api/CustomerManagement/customer")]

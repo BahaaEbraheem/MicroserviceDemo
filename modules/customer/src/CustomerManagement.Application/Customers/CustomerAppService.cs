@@ -31,10 +31,10 @@ namespace CustomerManagement.Customers
     {
         private readonly ICustomerRepository _customerRepository;
         private readonly CustomerManager _customerManager;
-        public CustomerAppService(IRepository<Customer, Guid> repository,
+        public CustomerAppService(
             CustomerManager customerManager,
             ICustomerRepository customerRepository)
-            : base(repository)
+            : base(customerRepository)
         {
             _customerManager = customerManager;
             _customerRepository = customerRepository;

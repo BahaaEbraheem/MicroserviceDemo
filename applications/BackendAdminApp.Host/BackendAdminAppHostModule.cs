@@ -26,6 +26,12 @@ using Volo.Abp.TenantManagement.Web;
 using Volo.Abp.UI.Navigation;
 using Volo.Blogging;
 using Volo.Abp.Http.Client.Web;
+using CurrencyManagment.Web;
+using CustomerManagement.Web;
+using RemittanceManagement.Web;
+using CurrencyManagment;
+using CustomerManagement;
+using RemittanceManagement;
 
 namespace BackendAdminApp.Host
 {
@@ -45,6 +51,12 @@ namespace BackendAdminApp.Host
         typeof(AbpAspNetCoreMvcUiBasicThemeModule),
         typeof(AbpFeatureManagementHttpApiClientModule),
 
+        typeof(CurrencyManagmentHttpApiClientModule),
+        typeof(CurrencyManagmentWebModule),
+        typeof(CustomerManagementHttpApiClientModule),
+        typeof(CustomerManagementWebModule),
+        typeof(RemittanceManagementHttpApiClientModule),
+        typeof(RemittanceManagementWebModule),
 
         typeof(AbpHttpClientWebModule)
 
