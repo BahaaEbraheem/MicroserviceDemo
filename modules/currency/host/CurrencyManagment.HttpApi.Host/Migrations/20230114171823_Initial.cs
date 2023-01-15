@@ -5,9 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace CurrencyManagment.Migrations
 {
-#pragma warning disable CS8981 // The type name only contains lower-cased ascii characters. Such names may become reserved for the language.
-    public partial class initial : Migration
-#pragma warning restore CS8981 // The type name only contains lower-cased ascii characters. Such names may become reserved for the language.
+    public partial class Initial : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {

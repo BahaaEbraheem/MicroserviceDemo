@@ -8,13 +8,18 @@ public class CurrencyManagmentPermissionDefinitionProvider : PermissionDefinitio
 {
     public override void Define(IPermissionDefinitionContext context)
     {
-        var myGroup = context.AddGroup(CurrencyManagmentPermissions.GroupName, L("Permission:CurrencyManagment"));
+        var CurrencyManagmentGroup = context.AddGroup(CurrencyManagmentPermissions.GroupName, L("Permission:CurrencyManagment"));
 
 
-        var currenciesPermission = myGroup.AddPermission(CurrencyManagmentPermissions.Currencies.Default, L("Permission:Currencies"));
-        currenciesPermission.AddChild(CurrencyManagmentPermissions.Currencies.Create, L("Permission:Currencies.Create"));
-        currenciesPermission.AddChild(CurrencyManagmentPermissions.Currencies.Edit, L("Permission:Currencies.Edit"));
-        currenciesPermission.AddChild(CurrencyManagmentPermissions.Currencies.Delete, L("Permission:Currencies.Delete"));
+        var currencies = CurrencyManagmentGroup.AddPermission(CurrencyManagmentPermissions.Currencies.Default, L("Permission:Currencies"));
+        currencies.AddChild(CurrencyManagmentPermissions.Currencies.Create, L("Permission:Create"));
+        currencies.AddChild(CurrencyManagmentPermissions.Currencies.Update, L("Permission:Update"));
+        currencies.AddChild(CurrencyManagmentPermissions.Currencies.Delete, L("Permission:Delete"));
+
+
+
+
+
 
     }
 

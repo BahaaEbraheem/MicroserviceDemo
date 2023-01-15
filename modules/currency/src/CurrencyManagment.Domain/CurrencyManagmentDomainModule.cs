@@ -1,5 +1,6 @@
-﻿using Volo.Abp.Domain;
+using Volo.Abp.Domain;
 using Volo.Abp.Modularity;
+using Volo.Abp.Authorization;
 
 namespace CurrencyManagment;
 
@@ -7,7 +8,8 @@ namespace CurrencyManagment;
     typeof(AbpDddDomainModule),
     typeof(CurrencyManagmentDomainSharedModule)
 )]
-public class CurrencyManagmentDomainModule : AbpModule
+[DependsOn(typeof(AbpAuthorizationModule))]
+    public class CurrencyManagmentDomainModule : AbpModule
 {
 
 }

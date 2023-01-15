@@ -32,6 +32,7 @@ using RemittanceManagement.Web;
 using CurrencyManagment;
 using CustomerManagement;
 using RemittanceManagement;
+using ProductManagement.Localization;
 
 namespace BackendAdminApp.Host
 {
@@ -71,7 +72,7 @@ namespace BackendAdminApp.Host
             {
                 options.Languages.Add(new LanguageInfo("en", "en", "English"));
             });
-
+        
             Configure<AbpMultiTenancyOptions>(options =>
             {
                 options.IsEnabled = MsDemoConsts.IsMultiTenancyEnabled;
@@ -106,6 +107,11 @@ namespace BackendAdminApp.Host
                     options.Scope.Add("BackendAdminAppGateway");
                     options.Scope.Add("IdentityService");
                     options.Scope.Add("ProductService");
+
+                    options.Scope.Add("RemittanceService");
+                    options.Scope.Add("CurrencyService");
+                    options.Scope.Add("CustomerService");
+
                     options.Scope.Add("TenantManagementService");
                     
                 });

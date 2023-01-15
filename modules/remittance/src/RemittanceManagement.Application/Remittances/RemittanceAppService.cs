@@ -1,5 +1,4 @@
 ﻿using Microsoft.AspNetCore.Authorization;
-using RemittanceManagement.Permissions;
 using MsDemo.Shared.Dtos;
 using System;
 using System.Collections.Generic;
@@ -13,16 +12,10 @@ using Volo.Abp.Domain.Entities;
 using Volo.Abp.Domain.Repositories;
 using System.Linq.Dynamic.Core;
 using Volo.Abp.Validation;
-//using Microsoft.AspNetCore.Identity;
-//using Volo.Abp.Identity;
-//using IdentityUser = Volo.Abp.Identity.IdentityUser;
 using Volo.Abp.ObjectMapping;
 using Volo.Abp.Users;
 using RemittanceManagement.Status;
 using RemittanceManagement.Status.Dtos;
-using static RemittanceManagement.Permissions.RemittanceManagementPermissions;
-//using RemittanceManagement.Customers;
-//using static Volo.Abp.Identity.Settings.IdentitySettingNames;
 using Nito.Disposables.Internals;
 using System.Security.Cryptography.X509Certificates;
 using System.Collections.Concurrent;
@@ -31,52 +24,50 @@ using CustomerManagement.Customers;
 using CurrencyManagment.Currencies.Dtos;
 using CustomerManagement.Customers.Dtos;
 using static MsDemo.Shared.Enums.Enums;
-//using Microsoft.AspNetCore.Mvc.ModelBinding;
-//using RemittanceManagement.Customers.Dtos;
-//using IdentityServer4.Models;
-//using Microsoft.AspNetCore.Components;
-
+using Volo.Abp.Authorization.Permissions;
+using System.Data;
 
 namespace RemittanceManagement.Remittances;
 
-//[Authorize(RemittanceManagementPermissions.Remittances.Default)]
+[Authorize(RemittanceManagementPermissions.Remittances.Default)]
 
-public class RemittanceAppService : RemittanceManagementAppService ,IRemittanceAppService
+public class RemittanceAppService : RemittanceManagementAppService ,IRemittanceAppService, ITransientDependency
 {
     private readonly IRemittanceRepository _remittanceRepository;
     private readonly RemitanceStatusManager _remittanceStatusManager;
     private readonly IRemittanceStatusAppService _remittanceStatusAppService;
     private readonly RemittanceManager _remittanceManager;
-    //private readonly ICurrencyRepository _currencyAppService;
+    private readonly IPermissionChecker _permissionChecker;
     private readonly ICurrencyAppService _currencyAppService;
     private readonly ICustomerAppService _customerAppService;
     private readonly IRemittanceStatusRepository _remittanceStatusRepository;
-    //private readonly IRepository<IdentityUser, Guid> _userRepository;
-    //private readonly IdentityUserManager _identityUserManager;
+    private readonly ICurrentUser _currentUser;
     public RemittanceAppService(
-        //IdentityUserManager identityUserManager,
+        ICurrentUser currentUser,
+        IPermissionChecker permissionChecker,
         ICustomerAppService customerAppService,
         IRemittanceStatusRepository remittanceStatusRepository,
         IRemittanceRepository remittanceRepository,
         IRemittanceStatusAppService remittanceStatusAppService,
         RemittanceManager remittanceManager,
         ICurrencyAppService currencyAppService,
-        RemitanceStatusManager remittanceStatusManager
-       /*IRepository<IdentityUser, Guid> userRepository*/)
+        RemitanceStatusManager remittanceStatusManager)
     {
+
+
+        _currentUser = currentUser;
+        _permissionChecker = permissionChecker;
         _remittanceRepository = remittanceRepository;
         _customerAppService = customerAppService;
         _remittanceManager = remittanceManager;
         _currencyAppService = currencyAppService;
-        //_userRepository = userRepository;
         _remittanceStatusRepository = remittanceStatusRepository;
         _remittanceStatusAppService = remittanceStatusAppService;
         _remittanceStatusManager = remittanceStatusManager;
-        //_identityUserManager = identityUserManager;
 
 
     }
-    //[Authorize(RemittanceManagementPermissions.Remittances.Create)]
+   [Authorize(RemittanceManagementPermissions.Remittances.Create)]
 
     public async Task<RemittanceDto> CreateAsync(CreateRemittanceDto input)
     {
@@ -449,13 +440,13 @@ public class RemittanceAppService : RemittanceManagementAppService ,IRemittanceA
 
 
 
-    public async Task<ListResultDto<CurrencyLookupDto>> GetCurrencyLookupAsync()
+    public  Task<ListResultDto<CurrencyLookupDto>> GetCurrencyLookupAsync()
     {
-        var currencies =  _currencyAppService.GetAllAsync();
+        var currencies =  _currencyAppService.GetAllAsync().Result;
 
-        return new ListResultDto<CurrencyLookupDto>(
-            ObjectMapper.Map<List<CurrencyDto>, List<CurrencyLookupDto>>(await currencies)
-        );
+        return Task.FromResult( new ListResultDto<CurrencyLookupDto>(
+            ObjectMapper.Map<List<CurrencyDto>, List<CurrencyLookupDto>>( currencies)
+        ));
     }
 
     private static string NormalizeSorting(string sorting)
@@ -649,12 +640,12 @@ public class RemittanceAppService : RemittanceManagementAppService ,IRemittanceA
 
 
 
-    ////[Authorize(RemittanceManagementPermissions.Status.Create)]
 
     public async Task<PagedResultDto<RemittanceDto>> GetListRemittancesForCreator(GetRemittanceListPagedAndSortedResultRequestDto input)
     {
         bool CanCreateRemittance = await AuthorizationService
                  .IsGrantedAsync(RemittanceManagementPermissions.Remittances.Create);
+
 
         //Get the IQueryable<remittance> from the repository
         var remittancequeryable = _remittanceRepository.GetQueryableAsync().Result

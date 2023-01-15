@@ -8,12 +8,12 @@ public class CustomerManagementPermissionDefinitionProvider : PermissionDefiniti
 {
     public override void Define(IPermissionDefinitionContext context)
     {
-        var myGroup = context.AddGroup(CustomerManagementPermissions.GroupName, L("Permission:CustomerManagement"));
+        var CustomerManagementGroup = context.AddGroup(CustomerManagementPermissions.GroupName, L("Permission:CustomerManagement"));
 
-        var customersPermission = myGroup.AddPermission(CustomerManagementPermissions.Customers.Default, L("Permission:Customers"));
-        customersPermission.AddChild(CustomerManagementPermissions.Customers.Create, L("Permission:Customers.Create"));
-        customersPermission.AddChild(CustomerManagementPermissions.Customers.Edit, L("Permission:Customers.Edit"));
-        customersPermission.AddChild(CustomerManagementPermissions.Customers.Delete, L("Permission:Customers.Delete"));
+        var customers = CustomerManagementGroup.AddPermission(CustomerManagementPermissions.Customers.Default, L("Permission:Customers"));
+        customers.AddChild(CustomerManagementPermissions.Customers.Create, L("Permission:Create"));
+        customers.AddChild(CustomerManagementPermissions.Customers.Update, L("Permission:Update"));
+        customers.AddChild(CustomerManagementPermissions.Customers.Delete, L("Permission:Delete"));
     }
 
     private static LocalizableString L(string name)

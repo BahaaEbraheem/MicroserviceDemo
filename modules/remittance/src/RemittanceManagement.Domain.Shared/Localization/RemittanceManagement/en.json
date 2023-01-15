@@ -27,19 +27,24 @@
     "AmessageConfirmingThatTheRemittanceIsReady": "Are you sure to Ready the Remittance '{0}'?",
 
 
-
     "Permission:RemittanceManagement": "Remittance Management",
-    "Permission:RemittanceManagement.Create": "Creating new Remittance",
-    "Permission:RemittanceManagement.Edit": "Editing the Remittance",
-    "Permission:RemittanceManagement.Delete": "Deleting the Remittance",
+    "Permission:Remittances": "Remittances",
+    "Permission:Edit": "Edit",
+    "Permission:Delete": "Delete",
+    "Permission:Create": "Create",
+    "Permission:Approved": "Approved",
+    "Permission:Released": "Released",
+    "Permission:Ready": "Ready",
 
-
+    "Menu:RemittanceManagement": "Remittance Management",
+    "RemittanceManagement": "Remittance Management",
+    "Remittances": "Remittances",
     "Menu:Remittances": "Created Remittances",
-    "Menu:ReadyRemittances": "Ready Remittances",
-    "Menu:ApprovedRemittances": "Approved Remittances",
-    "CreatedRemittances": "Created Remittances",
-    "ApprovedRemittances": "Approved Remittances",
-    "ReadyRemittances": "Ready Remittances",
+    //"Menu:ReadyRemittances": "Ready Remittances",
+    //"Menu:ApprovedRemittances": "Approved Remittances",
+    //"CreatedRemittances": "Created Remittances",
+    //"ApprovedRemittances": "Approved Remittances",
+    //"ReadyRemittances": "Ready Remittances",
 
 
     "Actions": "Actions",

@@ -1,9 +1,11 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Volo.Abp.Authorization.Permissions;
 using Volo.Abp.Data;
 using Volo.Abp.DependencyInjection;
+using Volo.Abp.Domain.Repositories;
 using Volo.Abp.Guids;
 using Volo.Abp.Identity;
 using Volo.Abp.IdentityServer.ApiResources;
@@ -26,8 +28,10 @@ namespace AuthServer.Host
         private readonly IIdentityResourceDataSeeder _identityResourceDataSeeder;
         private readonly IGuidGenerator _guidGenerator;
         private readonly IPermissionDataSeeder _permissionDataSeeder;
+        private readonly IRepository<IdentityRole, Guid> _roleRepository;
 
         public AuthServerDataSeeder(
+            IRepository<IdentityRole, Guid> roleRepository,
             IClientRepository clientRepository,
             IApiResourceRepository apiResourceRepository,
             IIdentityResourceDataSeeder identityResourceDataSeeder,
@@ -35,6 +39,7 @@ namespace AuthServer.Host
             IPermissionDataSeeder permissionDataSeeder,
             IApiScopeRepository apiScopeRepository)
         {
+            _roleRepository = roleRepository;
             _clientRepository = clientRepository;
             _apiResourceRepository = apiResourceRepository;
             _identityResourceDataSeeder = identityResourceDataSeeder;
@@ -50,14 +55,52 @@ namespace AuthServer.Host
             await CreateApiScopesAsync();
             await CreateApiResourcesAsync();
             await CreateClientsAsync();
+            await SeedRolesAsync();
         }
+        private async Task SeedRolesAsync()
+        {
 
+            if (await _roleRepository.GetCountAsync() > 1)
+            {
+                return;
+            }
+            await _roleRepository.InsertAsync(
+               new IdentityRole
+               (
+                 _guidGenerator.Create(),
+                  "Creator"
+               ),
+               autoSave: true
+           );
+            await _roleRepository.InsertAsync(
+               new IdentityRole
+               (
+                 _guidGenerator.Create(),
+                  "Supervisor"
+               ),
+               autoSave: true
+           );
+            await _roleRepository.InsertAsync(
+           new IdentityRole
+           (
+             _guidGenerator.Create(),
+              "Releaser"
+           ),
+           autoSave: true
+       );
+
+        }
         private async Task CreateApiScopesAsync()
         {
             await CreateApiScopeAsync("IdentityService");
             await CreateApiScopeAsync("TenantManagementService");
             await CreateApiScopeAsync("BloggingService");
             await CreateApiScopeAsync("ProductService");
+
+            await CreateApiScopeAsync("RemittanceService");
+            await CreateApiScopeAsync("CurrencyService");
+            await CreateApiScopeAsync("CustomerService");
+
             await CreateApiScopeAsync("InternalGateway");
             await CreateApiScopeAsync("BackendAdminAppGateway");
             await CreateApiScopeAsync("PublicWebSiteGateway");
@@ -97,6 +140,11 @@ namespace AuthServer.Host
             await CreateApiResourceAsync("TenantManagementService", commonApiUserClaims);
             await CreateApiResourceAsync("BloggingService", commonApiUserClaims);
             await CreateApiResourceAsync("ProductService", commonApiUserClaims);
+
+            await CreateApiResourceAsync("RemittanceService", commonApiUserClaims);
+            await CreateApiResourceAsync("CurrencyService", commonApiUserClaims);
+            await CreateApiResourceAsync("CustomerService", commonApiUserClaims);
+
             await CreateApiResourceAsync("InternalGateway", commonApiUserClaims);
             await CreateApiResourceAsync("BackendAdminAppGateway", commonApiUserClaims);
             await CreateApiResourceAsync("PublicWebSiteGateway", commonApiUserClaims);
@@ -144,7 +192,7 @@ namespace AuthServer.Host
 
             await CreateClientAsync(
                 "console-client-demo",
-                new[] { "BloggingService", "IdentityService", "InternalGateway", "ProductService", "TenantManagementService" },
+                new[] { "BloggingService", "IdentityService", "InternalGateway", "ProductService",  "TenantManagementService" },
                 new[] { "client_credentials", "password" },
                 commonSecret,
                 permissions: new[] { IdentityPermissions.Users.Default, TenantManagementPermissions.Tenants.Default, "ProductManagement.Product" }
@@ -152,7 +200,8 @@ namespace AuthServer.Host
 
             await CreateClientAsync(
                 "backend-admin-app-client",
-                commonScopes.Union(new[] { "BackendAdminAppGateway", "IdentityService", "ProductService", "TenantManagementService" }),
+                commonScopes.Union(new[] { "BackendAdminAppGateway", "IdentityService", 
+                    "ProductService", "RemittanceService","CurrencyService","CustomerService", "TenantManagementService" }),
                 new[] { "hybrid" },
                 commonSecret,
                 permissions: new[] { IdentityPermissions.Users.Default, "ProductManagement.Product" },
@@ -176,6 +225,13 @@ namespace AuthServer.Host
                 commonSecret,
                 permissions: new[] { IdentityPermissions.UserLookup.Default }
             );
+            await CreateClientAsync(
+              "remittance-service-client",
+              new[] { "InternalGateway" ,"IdentityService", "CustomerService", "CurrencyService" },
+              new[] { "client_credentials" },
+              commonSecret,
+              permissions: new[] { "CurrencyManagment.Currencies", "CustomerManagement.Customers" }
+          );
         }
 
         private async Task<Client> CreateClientAsync(

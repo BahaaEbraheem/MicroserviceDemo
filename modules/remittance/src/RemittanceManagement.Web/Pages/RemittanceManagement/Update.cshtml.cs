@@ -8,7 +8,6 @@ using RemittanceManagement.Remittances;
 using MsDemo.Shared.Dtos;
 using Volo.Abp.AspNetCore.Mvc.UI.RazorPages;
 using Volo.Abp.ObjectMapping;
-using static RemittanceManagement.Permissions.RemittanceManagementPermissions;
 using static MsDemo.Shared.Enums.Enums;
 
 namespace RemittanceManagement.Web.Pages.RemittanceManagement;

@@ -7,7 +7,6 @@ using System.Threading.Tasks;
 using Volo.Abp.Application.Dtos;
 using Volo.Abp.Application.Services;
 using Volo.Abp.Domain.Repositories;
-using RemittanceManagement.Permissions;
 using Microsoft.AspNetCore.Authorization;
 using AutoMapper;
 using Volo.Abp.ObjectMapping;

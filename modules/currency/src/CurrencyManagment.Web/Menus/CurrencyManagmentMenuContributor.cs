@@ -1,4 +1,5 @@
 ﻿using CurrencyManagment.Localization;
+using CurrencyManagment.Permissions;
 using System.Threading.Tasks;
 using Volo.Abp.UI.Navigation;
 
@@ -14,13 +15,16 @@ public class CurrencyManagmentMenuContributor : IMenuContributor
         }
     }
 
-    private Task ConfigureMainMenuAsync(MenuConfigurationContext context)
+    private async Task ConfigureMainMenuAsync(MenuConfigurationContext context)
     {
         var l = context.GetLocalizer<CurrencyManagmentResource>();
+        var rootMenuItem = new ApplicationMenuItem("CurrencyManagment", l["Menu:CurrencyManagment"]);
 
-        //Add main menu items.
-        context.Menu.AddItem(new ApplicationMenuItem(CurrencyManagmentMenus.Prefix, displayName: l["Menu:CurrencyManagment"], "~/CurrencyManagment", icon: "fa fa-globe"));
-
-        return Task.CompletedTask;
+        if (await context.IsGrantedAsync(CurrencyManagmentPermissions.Currencies.Default))
+        {
+            //Add main menu items.
+            rootMenuItem.AddItem(new ApplicationMenuItem(CurrencyManagmentMenus.Prefix, displayName: l["Menu:CurrencyManagment"], "~/CurrencyManagment", icon: "fa fa-globe"));
+        }
+        context.Menu.AddItem(rootMenuItem);
     }
 }

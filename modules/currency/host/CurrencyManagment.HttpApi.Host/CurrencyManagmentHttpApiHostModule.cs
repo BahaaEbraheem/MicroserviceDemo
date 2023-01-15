@@ -15,13 +15,10 @@ using CurrencyManagment.EntityFrameworkCore;
 using StackExchange.Redis;
 using Microsoft.OpenApi.Models;
 using Volo.Abp;
-using Volo.Abp.AspNetCore.Mvc.UI.MultiTenancy;
-using Volo.Abp.AspNetCore.Mvc.UI.Theme.Shared;
-using Volo.Abp.AspNetCore.Serilog;
+
 using Volo.Abp.AuditLogging.EntityFrameworkCore;
 using Volo.Abp.Autofac;
 using Volo.Abp.Caching;
-using Volo.Abp.Caching.StackExchangeRedis;
 using Volo.Abp.EntityFrameworkCore;
 using Volo.Abp.EntityFrameworkCore.SqlServer;
 using Volo.Abp.Localization;
@@ -30,7 +27,6 @@ using Volo.Abp.MultiTenancy;
 using Volo.Abp.PermissionManagement.EntityFrameworkCore;
 using Volo.Abp.Security.Claims;
 using Volo.Abp.SettingManagement.EntityFrameworkCore;
-using Volo.Abp.Swashbuckle;
 using Volo.Abp.TenantManagement.EntityFrameworkCore;
 using Volo.Abp.VirtualFileSystem;
 using Volo.Abp.Threading;
@@ -42,10 +38,7 @@ using Volo.Abp.EventBus.RabbitMq;
 using Volo.Abp.Auditing;
 using MsDemo.Shared;
 using Autofac.Core;
-using Volo.Abp.Http.Client.IdentityModel;
-using Volo.Abp.Http.Client.Web;
-using Volo.Abp.Http.Client.IdentityModel.Web;
-using Volo.Abp.Identity;
+
 
 namespace CurrencyManagment;
 
@@ -53,16 +46,6 @@ namespace CurrencyManagment;
     typeof(CurrencyManagmentApplicationModule),
     typeof(CurrencyManagmentEntityFrameworkCoreModule),
     typeof(CurrencyManagmentHttpApiModule),
-        //typeof(AbpAspNetCoreMvcUiMultiTenancyModule),
-        //   typeof(AbpAutofacModule),
-        //   typeof(AbpCachingStackExchangeRedisModule),
-        //   typeof(AbpEntityFrameworkCoreSqlServerModule),
-        //   typeof(AbpAuditLoggingEntityFrameworkCoreModule),
-        //   typeof(AbpPermissionManagementEntityFrameworkCoreModule),
-        //   typeof(AbpSettingManagementEntityFrameworkCoreModule),
-        //   typeof(AbpTenantManagementEntityFrameworkCoreModule),
-        //   typeof(AbpAspNetCoreSerilogModule),
-        //   typeof(AbpSwashbuckleModule)
         typeof(AbpAutofacModule),
         typeof(AbpAspNetCoreMvcModule),
         typeof(AbpEventBusRabbitMqModule),
@@ -70,22 +53,9 @@ namespace CurrencyManagment;
         typeof(AbpAuditLoggingEntityFrameworkCoreModule),
         typeof(AbpPermissionManagementEntityFrameworkCoreModule),
         typeof(AbpSettingManagementEntityFrameworkCoreModule),
-
         typeof(AbpAspNetCoreMultiTenancyModule),
-        typeof(AbpTenantManagementEntityFrameworkCoreModule),
+        typeof(AbpTenantManagementEntityFrameworkCoreModule)
 
-        // To automate requesting access token and adding it as bearer to the request headers
-        typeof(AbpHttpClientIdentityModelModule),
-
-        typeof(AbpHttpClientWebModule),
-        typeof(AbpHttpClientIdentityModelWebModule),
-        typeof(AbpIdentityHttpApiClientModule),
-
-
-        typeof(AbpAspNetCoreMvcUiMultiTenancyModule),
-        typeof(AbpCachingStackExchangeRedisModule),
-        typeof(AbpAspNetCoreSerilogModule),
-        typeof(AbpSwashbuckleModule)
     )]
 public class CurrencyManagmentHttpApiHostModule : AbpModule
 {

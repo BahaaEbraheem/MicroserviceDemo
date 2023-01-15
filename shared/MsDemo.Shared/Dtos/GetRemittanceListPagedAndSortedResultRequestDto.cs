@@ -8,16 +8,16 @@ namespace MsDemo.Shared.Dtos
 {
    public class GetRemittanceListPagedAndSortedResultRequestDto : PagedAndSortedResultRequestDto
     {
-        public Guid Id { get; set; }
+        public Guid? Id { get; set; }
 
-        public double Amount { get; set; }
-        public double TotalAmount { get; set; }
-        public RemittanceType Type { get; set; }
+        public double? Amount { get; set; }
+        public double? TotalAmount { get; set; }
+        public RemittanceType? Type { get; set; }
         public string SerialNumber { get; set; }
         public string SenderName { get; set; }
         public string ReceiverFullName { get; set; }
         public string CurrencyName { get; set; }
-        public Remittance_Status State { get; set; }
+        public Remittance_Status? State { get; set; }
         public DateTime? StatusDate { get; set; }
 
 
@@ -33,10 +33,10 @@ namespace MsDemo.Shared.Dtos
         public  DateTime? LastModificationTime { get; set; }
 
         public  Guid? LastModifierId { get; set; }
-        public  DateTime CreationTime { get; set; }
+        public  DateTime? CreationTime { get; set; }
 
         public  Guid? CreatorId { get; set; }
-        public  bool IsDeleted { get; set; }
+        public  bool? IsDeleted { get; set; }
 
         public  Guid? DeleterId { get; set; }
 

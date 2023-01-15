@@ -28,11 +28,11 @@
     "AmessageConfirmingThatTheRemittanceIsReady": "Are you sure to Ready the Remittance '{0}'?",
 
 
-    "Permission:CustomerManagement": "Currency Management",
-    "Permission:CustomerManagement.Create": "Creating new Customers",
-    "Permission:CustomerManagement.Edit": "Editing the Customers",
-    "Permission:CustomerManagement.Delete": "Deleting the Customers",
-
+    "Permission:CustomerManagement": "Customer Management",
+    "Permission:Customers": "Customers",
+    "Permission:Create": "Create",
+    "Permission:Update": "Update",
+    "Permission:Delete": "Delete",
 
 
     "Menu:CustomerManagement": "Customers",

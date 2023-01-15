@@ -27,11 +27,12 @@
     "RemittanceDeletionConfirmationMessage": "Are you sure to delete the Remittance '{0}'?",
     "AmessageConfirmingThatTheRemittanceIsReady": "Are you sure to Ready the Remittance '{0}'?",
 
+    "Permission:CurrencyManagment": "Currency Management",
+    "Permission:Currencies": "Currencies",
+    "Permission:Create": "Create",
+    "Permission:Update": "Update",
+    "Permission:Delete": "Delete",
 
-    "Permission:CurrencyManagement": "Currency Management",
-    "Permission:CurrencyManagement.Create": "Creating new Currencies",
-    "Permission:CurrencyManagement.Edit": "Editing the Currencies",
-    "Permission:CurrencyManagement.Delete": "Deleting the Currencies",
 
 
     "Menu:CurrencyManagment": "Currencies",

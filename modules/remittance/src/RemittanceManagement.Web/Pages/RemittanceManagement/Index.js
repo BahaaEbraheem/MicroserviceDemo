@@ -16,7 +16,8 @@
             autoWidth: false,
             scrollCollapse: true,
             order: [[1, "desc"]],
-            ajax: abp.libs.datatables.createAjax(remittanceManagement.remittances.remittance.getList),
+            //ajax: abp.libs.datatables.createAjax(remittanceManagement.remittances.remittance.getList),
+            ajax: abp.libs.datatables.createAjax(remittanceManagement.remittances.remittance.getListRemittancesForCreator),
             columnDefs: [
                 {
                     rowAction: {

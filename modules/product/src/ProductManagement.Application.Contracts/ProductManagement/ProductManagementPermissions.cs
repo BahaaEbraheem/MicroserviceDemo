@@ -1,11 +1,13 @@
-﻿using Volo.Abp.Reflection;
+﻿using Volo.Abp.Localization;
+using Volo.Abp.Reflection;
 
 namespace ProductManagement
 {
     public class ProductManagementPermissions
     {
-        public const string GroupName = "ProductManagement";
 
+
+        public const string GroupName = "ProductManagement";
         public static class Products
         {
             public const string Default = GroupName + ".Product";

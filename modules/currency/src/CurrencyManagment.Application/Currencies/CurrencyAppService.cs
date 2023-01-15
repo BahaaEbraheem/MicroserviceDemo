@@ -20,13 +20,13 @@ using Volo.Abp;
 using System.Xml.Linq;
 using System.Reflection;
 using static CurrencyManagment.Permissions.CurrencyManagmentPermissions;
+using Volo.Abp.Authorization.Permissions;
 //using Currency.Remittances;
 
 namespace CurrencyManagment.Currencies
 {
-    //  [Authorize(CurrencyManagmentPermissions.Currencies.Default)]
-   
-    public class CurrencyAppService :
+    [Authorize(CurrencyManagmentPermissions.Currencies.Default)]
+    public class CurrencyAppService  :
         CrudAppService<
                Currency, //The Currency entity
             CurrencyDto, //Used to show Currencies
@@ -36,24 +36,26 @@ namespace CurrencyManagment.Currencies
         ICurrencyAppService //implement the ICurrencyAppService
     {
         private readonly ICurrencyRepository _currencyRepository;
-        //private readonly IRemittanceAppService _remittanceAppService;
+        private readonly IPermissionChecker _permissionChecker;
         private readonly CurrencyManager _currencyManager;
         public CurrencyAppService(
+
             ICurrencyRepository currencyRepository,
-            //IRemittanceAppService remittanceAppService,
+            IPermissionChecker permissionChecker,
             CurrencyManager currencyManager)
     : base(currencyRepository)
         {
+            _permissionChecker = permissionChecker;
             _currencyRepository = currencyRepository;
             _currencyManager = currencyManager;
-            //_remittanceAppService = remittanceAppService;
         }
 
 
 
         public override async Task<PagedResultDto<CurrencyDto>> GetListAsync(CurrencyPagedAndSortedResultRequestDto input)
         {
-           
+      
+
             var filter = ObjectMapper.Map<CurrencyPagedAndSortedResultRequestDto, CurrencyDto>(input);
             var sorting = (string.IsNullOrEmpty(input.Sorting) ? "Name DESC" : input.Sorting).Replace("ShortName", "Name");
 
@@ -65,7 +67,7 @@ namespace CurrencyManagment.Currencies
 
 
 
-      //  [Authorize(CurrencyManagmentPermissions.Currencies.Create)]
+        [Authorize(CurrencyManagmentPermissions.Currencies.Create)]
         public override async Task<CurrencyDto> CreateAsync(CreateUpdateCurrencyDto input)
         {
             if (input == null)

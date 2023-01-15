@@ -15,13 +15,9 @@ using RemittanceManagement.EntityFrameworkCore;
 using StackExchange.Redis;
 using Microsoft.OpenApi.Models;
 using Volo.Abp;
-using Volo.Abp.AspNetCore.Mvc.UI.MultiTenancy;
-using Volo.Abp.AspNetCore.Mvc.UI.Theme.Shared;
-using Volo.Abp.AspNetCore.Serilog;
 using Volo.Abp.AuditLogging.EntityFrameworkCore;
 using Volo.Abp.Autofac;
 using Volo.Abp.Caching;
-using Volo.Abp.Caching.StackExchangeRedis;
 using Volo.Abp.EntityFrameworkCore;
 using Volo.Abp.EntityFrameworkCore.SqlServer;
 using Volo.Abp.Localization;
@@ -30,7 +26,6 @@ using Volo.Abp.MultiTenancy;
 using Volo.Abp.PermissionManagement.EntityFrameworkCore;
 using Volo.Abp.Security.Claims;
 using Volo.Abp.SettingManagement.EntityFrameworkCore;
-using Volo.Abp.Swashbuckle;
 using Volo.Abp.TenantManagement.EntityFrameworkCore;
 using Volo.Abp.VirtualFileSystem;
 using MsDemo.Shared;
@@ -40,11 +35,13 @@ using Volo.Abp.Data;
 using Volo.Abp.AspNetCore.Mvc;
 using Volo.Abp.AspNetCore.MultiTenancy;
 using Volo.Abp.EventBus.RabbitMq;
-using Volo.Abp.Http.Client.IdentityModel;
 using Volo.Abp.Http.Client;
 using Volo.Abp.Http.Client.Web;
 using Volo.Abp.Http.Client.IdentityModel.Web;
 using Volo.Abp.Identity;
+using Volo.Abp.PermissionManagement;
+using Volo.Abp.Http.Client.IdentityModel;
+using Microsoft.IdentityModel.Protocols.OpenIdConnect;
 
 namespace RemittanceManagement;
 [DependsOn(
@@ -67,13 +64,12 @@ namespace RemittanceManagement;
 
         typeof(AbpHttpClientWebModule),
         typeof(AbpHttpClientIdentityModelWebModule),
-        typeof(AbpIdentityHttpApiClientModule),
+        typeof(AbpIdentityHttpApiClientModule)
 
 
-        typeof(AbpAspNetCoreMvcUiMultiTenancyModule),
-        typeof(AbpCachingStackExchangeRedisModule),
-        typeof(AbpAspNetCoreSerilogModule),
-        typeof(AbpSwashbuckleModule)
+        //typeof(AbpAspNetCoreMvcUiMultiTenancyModule),
+        //typeof(AbpAspNetCoreSerilogModule),
+        //typeof(AbpSwashbuckleModule)
     )]
 public class RemittanceManagementHttpApiHostModule : AbpModule
 {
@@ -81,33 +77,66 @@ public class RemittanceManagementHttpApiHostModule : AbpModule
     public override void ConfigureServices(ServiceConfigurationContext context)
     {
 
-
-
-
         var configuration = context.Services.GetConfiguration();
+
 
         Configure<AbpMultiTenancyOptions>(options =>
         {
             options.IsEnabled = MsDemoConsts.IsMultiTenancyEnabled;
         });
 
+        //context.Services.AddAuthentication("Bearer")
+        //    .AddIdentityServerAuthentication(options =>
+        //    {
+        //        options.Authority = configuration["AuthServer:Authority"];
+        //        options.ApiName = configuration["AuthServer:ApiName"];
+        //        options.RequireHttpsMetadata = Convert.ToBoolean(configuration["AuthServer:RequireHttpsMetadata"]);
+        //    });
+
+        //context.Services.AddSwaggerGen(options =>
+        //{
+        //    options.SwaggerDoc("v1", new OpenApiInfo { Title = "Remittance Management API", Version = "v1" });
+        //    options.DocInclusionPredicate((docName, description) => true);
+        //    options.CustomSchemaIds(type => type.FullName);
+        //});
+
+
+
         context.Services.AddAuthentication("Bearer")
-            .AddIdentityServerAuthentication(options =>
-            {
-                options.Authority = configuration["AuthServer:Authority"];
-                options.ApiName = configuration["AuthServer:ApiName"];
-                options.RequireHttpsMetadata = Convert.ToBoolean(configuration["AuthServer:RequireHttpsMetadata"]);
-            });
+              .AddIdentityServerAuthentication(options =>
+              {
+                  options.Authority = configuration["AuthServer:Authority"];
+                  options.ApiName = configuration["AuthServer:ApiName"];
+                  options.RequireHttpsMetadata = Convert.ToBoolean(configuration["AuthServer:RequireHttpsMetadata"]);
+              });
 
         context.Services.AddSwaggerGen(options =>
         {
-            options.SwaggerDoc("v1", new OpenApiInfo { Title = "Remittance Management API", Version = "v1" });
+            options.SwaggerDoc("v1", new OpenApiInfo { Title = "Remittance Service API", Version = "v1" });
             options.DocInclusionPredicate((docName, description) => true);
             options.CustomSchemaIds(type => type.FullName);
         });
 
 
-        Configure<AbpLocalizationOptions>(options =>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    Configure<AbpLocalizationOptions>(options =>
         {
             options.Languages.Add(new LanguageInfo("en", "en", "English"));
         });
