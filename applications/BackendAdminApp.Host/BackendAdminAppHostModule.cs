@@ -33,6 +33,8 @@ using CurrencyManagment;
 using CustomerManagement;
 using RemittanceManagement;
 using ProductManagement.Localization;
+using AmlManagement.Web;
+using AmlManagement;
 
 namespace BackendAdminApp.Host
 {
@@ -58,7 +60,8 @@ namespace BackendAdminApp.Host
         typeof(CustomerManagementWebModule),
         typeof(RemittanceManagementHttpApiClientModule),
         typeof(RemittanceManagementWebModule),
-
+        typeof(AmlManagementHttpApiClientModule),
+        typeof(AmlManagementWebModule),
         typeof(AbpHttpClientWebModule)
 
         )]
@@ -111,6 +114,7 @@ namespace BackendAdminApp.Host
                     options.Scope.Add("RemittanceService");
                     options.Scope.Add("CurrencyService");
                     options.Scope.Add("CustomerService");
+                    options.Scope.Add("AmlService");
 
                     options.Scope.Add("TenantManagementService");
                     

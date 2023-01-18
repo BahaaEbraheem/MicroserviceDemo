@@ -1,0 +1,15 @@
+{
+  "extends": "./tsconfig.prod.json",
+  "compilerOptions": {
+    "paths": {
+      "@aml-management": [
+        "projects/aml-management/src/public-api.ts"
+      ],
+      "@aml-management/config": [
+        "projects/aml-management/config/src/public-api.ts"
+      ],
+      "@proxy": ["projects/aml-management/src/lib/proxy/index.ts"],
+      "@proxy/*": ["projects/aml-management/src/lib/proxy/*"]
+    }
+  }
+}

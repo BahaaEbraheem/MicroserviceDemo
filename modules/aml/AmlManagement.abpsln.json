@@ -1,0 +1,7 @@
+{
+  "modules": {
+    "AmlManagement": {
+      "path": "AmlManagement.abpmdl.json"
+    }
+  }
+}

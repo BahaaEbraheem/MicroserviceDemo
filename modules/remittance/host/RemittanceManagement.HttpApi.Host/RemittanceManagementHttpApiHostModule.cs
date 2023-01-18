@@ -42,6 +42,7 @@ using Volo.Abp.Identity;
 using Volo.Abp.PermissionManagement;
 using Volo.Abp.Http.Client.IdentityModel;
 using Microsoft.IdentityModel.Protocols.OpenIdConnect;
+using RemittanceManagement.Remittances;
 
 namespace RemittanceManagement;
 [DependsOn(
@@ -100,6 +101,11 @@ public class RemittanceManagementHttpApiHostModule : AbpModule
         //    options.CustomSchemaIds(type => type.FullName);
         //});
 
+        context.Services.AddAbpDbContext<RemittanceManagementHttpApiHostMigrationsDbContext>(options =>
+        {
+            options.AddDefaultRepositories(includeAllEntities: true);
+            options.AddRepository<Remittance, EfCoreRemittanceRepository>();
+        });
 
 
         context.Services.AddAuthentication("Bearer")

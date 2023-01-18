@@ -41,7 +41,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Remove="Pages\RemittanceForReleaser\Index.js" />
+    <None Remove="Pages\RemittanceForSupervisor\Index.js" />
     <None Remove="Pages\RemittanceManagement\Index.js" />
+    <None Remove="Pages\RemittanceStatus\Index.js" />
   </ItemGroup>
 
   <ItemGroup>

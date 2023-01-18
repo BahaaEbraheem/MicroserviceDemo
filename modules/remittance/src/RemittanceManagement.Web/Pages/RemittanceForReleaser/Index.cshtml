@@ -1,0 +1,41 @@
+﻿@page
+@using Microsoft.Extensions.Localization
+@using RemittanceManagement.Localization
+@using RemittanceManagement.Web.Pages.RemittanceForReleaser
+@model RemittanceManagement.Web.Pages.RemittanceForReleaser.IndexModel
+@inject IStringLocalizer<RemittanceManagementResource> L
+
+
+@section scripts
+{
+    <abp-script src="/Pages/RemittanceForReleaser/Index.js" />
+}
+
+<abp-card>
+        <abp-card-header>
+            <abp-row>
+                <abp-column size-md="_6">
+                <h2>@L["RemittanceForReleaser"]</h2>
+                </abp-column>
+         
+        </abp-row>
+        </abp-card-header>
+    <abp-card-body>
+        <abp-table striped-rows="true" id="RemittancesTableReleaser" class="nowrap">
+                <thead>
+                    <tr>
+                        <th>@L["Actions"]</th>
+                        <th>@L["SerialNumber"]</th>
+                        <th>@L["Amount"]</th>
+                        <th>@L["TotalAmount"]</th>
+                        <th>@L["ReceiverFullName"]</th>
+                        <th>@L["CurrencyName"]</th>
+                        <th>@L["SenderName"]</th>
+                        <th>@L["State"]</th>
+                        <th>@L["StatusDate"]</th>
+                        <th>@L["CreationTime"]</th>
+                    </tr>
+                </thead>
+            </abp-table>
+    </abp-card-body>
+</abp-card>

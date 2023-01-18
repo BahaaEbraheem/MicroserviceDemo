@@ -88,7 +88,14 @@ namespace AuthServer.Host
            ),
            autoSave: true
        );
-
+            await _roleRepository.InsertAsync(
+                   new IdentityRole
+                   (
+                     _guidGenerator.Create(),
+                      "AmlChecker"
+                   ),
+                   autoSave: true
+               );
         }
         private async Task CreateApiScopesAsync()
         {
@@ -100,7 +107,8 @@ namespace AuthServer.Host
             await CreateApiScopeAsync("RemittanceService");
             await CreateApiScopeAsync("CurrencyService");
             await CreateApiScopeAsync("CustomerService");
-
+            await CreateApiScopeAsync("AmlService");
+            
             await CreateApiScopeAsync("InternalGateway");
             await CreateApiScopeAsync("BackendAdminAppGateway");
             await CreateApiScopeAsync("PublicWebSiteGateway");
@@ -144,6 +152,7 @@ namespace AuthServer.Host
             await CreateApiResourceAsync("RemittanceService", commonApiUserClaims);
             await CreateApiResourceAsync("CurrencyService", commonApiUserClaims);
             await CreateApiResourceAsync("CustomerService", commonApiUserClaims);
+            await CreateApiResourceAsync("AmlService", commonApiUserClaims);
 
             await CreateApiResourceAsync("InternalGateway", commonApiUserClaims);
             await CreateApiResourceAsync("BackendAdminAppGateway", commonApiUserClaims);
@@ -201,10 +210,11 @@ namespace AuthServer.Host
             await CreateClientAsync(
                 "backend-admin-app-client",
                 commonScopes.Union(new[] { "BackendAdminAppGateway", "IdentityService", 
-                    "ProductService", "RemittanceService","CurrencyService","CustomerService", "TenantManagementService" }),
+                    "ProductService", "RemittanceService","CurrencyService","CustomerService","AmlService", "TenantManagementService" }),
                 new[] { "hybrid" },
                 commonSecret,
-                permissions: new[] { IdentityPermissions.Users.Default, "ProductManagement.Product" },
+                permissions: new[] { IdentityPermissions.Users.Default, "ProductManagement.Product", "RemittanceManagement.Remittance", 
+                    "AmlManagement.AmlRemittance" },
                 redirectUri: "https://localhost:44354/signin-oidc",
                 postLogoutRedirectUri: "https://localhost:44354/signout-callback-oidc"
             );
@@ -227,11 +237,18 @@ namespace AuthServer.Host
             );
             await CreateClientAsync(
               "remittance-service-client",
-              new[] { "InternalGateway" ,"IdentityService", "CustomerService", "CurrencyService" },
+              new[] { "InternalGateway" ,"IdentityService", "CustomerService", "CurrencyService", "AmlService" },
               new[] { "client_credentials" },
               commonSecret,
               permissions: new[] { "CurrencyManagment.Currencies", "CustomerManagement.Customers" }
           );
+            await CreateClientAsync(
+            "aml-service-client",
+            new[] { "InternalGateway", "IdentityService", "RemittanceService" },
+            new[] { "client_credentials" },
+            commonSecret,
+            permissions: new[] {  "RemittanceManagement.Remittance", "AmlManagement.AmlRemittance.Check" }
+        );
         }
 
         private async Task<Client> CreateClientAsync(

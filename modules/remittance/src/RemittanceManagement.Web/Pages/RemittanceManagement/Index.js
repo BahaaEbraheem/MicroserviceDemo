@@ -24,6 +24,17 @@
                         items:
                             [
                                 {
+                                    text: l('Ready'),
+                                    visible: abp.auth.isGranted('RemittanceManagement.Remittance.Ready'),
+                                    action: function (data) {
+                                        remittanceManagement.remittances.remittance
+                                            .setReady(data.record)
+                                            .then(function () {
+                                                _dataTable.ajax.reload();
+                                            });
+                                    }
+                                },
+                                {
                                     text: l('Update'),
                                     //visible: abp.auth.isGranted('CurrencyManagment.Update'),
                                     action: function (data) {

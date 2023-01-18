@@ -15,6 +15,7 @@ public class RemittanceManagementPermissions
         public const string Approved = Default + ".Approved";
         public const string Released = Default + ".Released";
         public const string Ready = Default + ".Ready";
+        
     }
 
     public static string[] GetAll()

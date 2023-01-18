@@ -1,0 +1,14 @@
+{
+  "culture": "en",
+  "texts": {
+    "MyAccount": "My account",
+    "SamplePageMessage": "A sample page for the AmlManagement module",
+
+
+    "AmlManagement:00001": "Customer Aml Wanted : {customerName}",
+    "Permission:AmlManagement": "Aml Management",
+    "Menu:AmlManagement": "Aml Management",
+    "Permission:AmlRemittance": "Aml Remittance",
+    "Permission:Check": "Check"
+  }
+}

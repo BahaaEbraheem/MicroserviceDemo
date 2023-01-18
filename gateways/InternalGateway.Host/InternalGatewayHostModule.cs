@@ -28,6 +28,7 @@ using Volo.Blogging;
 using CurrencyManagment;
 using CustomerManagement;
 using RemittanceManagement;
+using AmlManagement;
 
 namespace InternalGateway.Host
 {
@@ -41,9 +42,11 @@ namespace InternalGateway.Host
         typeof(AbpSettingManagementEntityFrameworkCoreModule),
         typeof(AbpTenantManagementHttpApiModule),
         typeof(AbpAspNetCoreMultiTenancyModule),
-                 typeof(RemittanceManagementHttpApiModule),
+        typeof(RemittanceManagementHttpApiModule),
         typeof(CurrencyManagmentHttpApiModule),
-        typeof(CustomerManagementHttpApiModule)
+        typeof(CustomerManagementHttpApiModule),
+         typeof(AmlManagementHttpApiModule)
+
 
 
         )]

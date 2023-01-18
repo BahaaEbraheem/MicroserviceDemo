@@ -67,31 +67,27 @@ public class RemittanceController : RemittanceManagementController, IRemittanceA
     {
         return await _remittanceAppService.GetListRemittancesForCreator(input);
     }
+    [HttpGet]
+    [Route("GetListRemittancesForSupervisor")]
+    public virtual async Task<PagedResultDto<RemittanceDto>> GetListRemittancesForSupervisor(GetRemittanceListPagedAndSortedResultRequestDto input)
+    {
+        return await _remittanceAppService.GetListRemittancesForSupervisor(input);
 
-    //[HttpGet]
-    //[Route("GetListRemittancesForCreator")]
-    //public async Task<PagedResultDto<RemittanceDto>> GetListRemittancesForCreator(GetRemittanceListPagedAndSortedResultRequestDto input)
-    //{
-    //    return await _remittanceAppService.GetListRemittancesForCreator(input);
-    //}
-    //[HttpGet]
-    //[Route("GetListRemittancesForReleaser")]
-    //public async Task<PagedResultDto<RemittanceDto>> GetListRemittancesForReleaser(GetRemittanceListPagedAndSortedResultRequestDto input)
-    //{
-    //    return await _remittanceAppService.GetListRemittancesForReleaser(input);
-    //}
-    //[HttpGet]
-    //[Route("GetListRemittancesForSupervisor")]
-    //public async Task<PagedResultDto<RemittanceDto>> GetListRemittancesForSupervisor(GetRemittanceListPagedAndSortedResultRequestDto input)
-    //{
-    //    return await _remittanceAppService.GetListRemittancesForSupervisor(input);
-    //}
-    //[HttpGet]
-    //[Route("GetListRemittancesStatusAsync")]
-    //public async Task<PagedResultDto<RemittanceDto>> GetListRemittancesStatusAsync(GetRemittanceListPagedAndSortedResultRequestDto input)
-    //{
-    //    return await _remittanceAppService.GetListRemittancesStatusAsync(input);
-    //}
+    }
+
+    [HttpGet]
+    [Route("GetListRemittancesForReleaser")]
+    public async Task<PagedResultDto<RemittanceDto>> GetListRemittancesForReleaser(GetRemittanceListPagedAndSortedResultRequestDto input)
+    {
+        return await _remittanceAppService.GetListRemittancesForReleaser(input);
+    }
+
+    [HttpGet]
+    [Route("GetListRemittancesStatusAsync")]
+    public async Task<PagedResultDto<RemittanceDto>> GetListRemittancesStatusAsync(GetRemittanceListPagedAndSortedResultRequestDto input)
+    {
+        return await _remittanceAppService.GetListRemittancesStatusAsync(input);
+    }
     [HttpPost]
     [Route("SetApprove")]
     public async Task SetApprove(RemittanceDto input)
@@ -115,5 +111,11 @@ public class RemittanceController : RemittanceManagementController, IRemittanceA
     public async Task UpdateAsync(Guid id, UpdateRemittanceDto input)
     {
         await _remittanceAppService.UpdateAsync(id,input);
+    }
+    [HttpPost]
+    [Route("SetAmlChecked")]
+    public async Task SetAmlChecked(Guid? id)
+    {
+        await _remittanceAppService.SetAmlChecked(id);
     }
 }

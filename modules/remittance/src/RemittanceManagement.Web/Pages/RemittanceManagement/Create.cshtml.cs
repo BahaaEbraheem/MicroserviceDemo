@@ -34,7 +34,7 @@ namespace RemittanceManagement.Web.Pages.RemittanceManagement;
 
 
 
-    public    void OnGet()
+    public void OnGet()
     {
         //List<SelectListItem> CustomerListItems = new List<SelectListItem>();
      var CustomerList = _remittanceAppService.GetCustomerLookupAsync().Result.Items;

@@ -27,7 +27,18 @@ public class RemittanceManagementMenuContributor : IMenuContributor
         if (await context.IsGrantedAsync(RemittanceManagementPermissions.Remittances.Default))
         {
             rootMenuItem.AddItem(new ApplicationMenuItem("Remittances", l["Menu:Remittances"], "~/RemittanceManagement"));
+        
+        if (await context.IsGrantedAsync(RemittanceManagementPermissions.Remittances.Approved))
+        {
+            rootMenuItem.AddItem(new ApplicationMenuItem("Remittances", l["Menu:RemittanceForSupervisor"], "~/RemittanceForSupervisor"));
         }
+        if (await context.IsGrantedAsync(RemittanceManagementPermissions.Remittances.Released))
+        {
+            rootMenuItem.AddItem(new ApplicationMenuItem("Remittances", l["Menu:RemittanceForReleaser"], "~/RemittanceForReleaser"));
+        }
+            rootMenuItem.AddItem(new ApplicationMenuItem("Remittances", l["Menu:RemittanceStatusForAll"], "~/RemittanceStatus"));
+        }
+        
         context.Menu.AddItem(rootMenuItem);
 
 

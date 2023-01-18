@@ -18,16 +18,11 @@ namespace RemittanceManagement.Status
 {
     public class RemitanceStatusManager : DomainService
     {
-        private readonly IRemittanceRepository _remittanceRepository;
         private readonly IRemittanceStatusRepository _remittanceStatusRepository;
-        private readonly ICurrentUser _currentUser;
 
-        public RemitanceStatusManager(IRemittanceRepository remittanceRepository,
-            IRemittanceStatusRepository remittanceStatusRepository, ICurrentUser currentUser)
+        public RemitanceStatusManager(IRemittanceStatusRepository remittanceStatusRepository)
         {
-            _remittanceRepository = remittanceRepository;
             _remittanceStatusRepository = remittanceStatusRepository;
-            _currentUser = currentUser;
         }
 
         public async Task<RemittanceStatus> CreateAsync(Guid remittanceId, Remittance_Status State)
@@ -38,6 +33,11 @@ namespace RemittanceManagement.Status
                  remittanceId, State
 
             ));
+        }
+
+        public async Task InsertAsync(RemittanceStatus remittanceStatus)
+        {
+           await _remittanceStatusRepository.InsertAsync(remittanceStatus);
         }
 
         //public override Task InsertAsync(RemittanceStatus remittanceStatus)
