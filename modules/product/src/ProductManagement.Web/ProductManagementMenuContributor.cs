@@ -17,18 +17,19 @@ namespace ProductManagement
             }
         }
 
-        private async Task ConfigureMainMenu(MenuConfigurationContext context)
+        private  Task ConfigureMainMenu(MenuConfigurationContext context)
         {
             var l = context.GetLocalizer<ProductManagementResource>();
 
-            var rootMenuItem = new ApplicationMenuItem("ProductManagement", l["Menu:ProductManagement"]);
+            //var rootMenuItem = new ApplicationMenuItem("ProductManagement", l["Menu:ProductManagement"]);
 
-            if (await context.IsGrantedAsync(ProductManagementPermissions.Products.Default))
-            {
-                rootMenuItem.AddItem(new ApplicationMenuItem("Products", l["Menu:Products"], "/ProductManagement/Products"));
-            }
+            //if (await context.IsGrantedAsync(ProductManagementPermissions.Products.Default))
+            //{
+            //    rootMenuItem.AddItem(new ApplicationMenuItem("Products", l["Menu:Products"], "/ProductManagement/Products"));
+            //}
 
-            context.Menu.AddItem(rootMenuItem);
+            //context.Menu.AddItem(rootMenuItem);
+            return Task.CompletedTask;
         }
     }
 }

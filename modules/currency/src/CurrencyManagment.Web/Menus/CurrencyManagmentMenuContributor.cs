@@ -15,16 +15,17 @@ public class CurrencyManagmentMenuContributor : IMenuContributor
         }
     }
 
-    private async Task ConfigureMainMenuAsync(MenuConfigurationContext context)
+    private  Task ConfigureMainMenuAsync(MenuConfigurationContext context)
     {
         var l = context.GetLocalizer<CurrencyManagmentResource>();
-        var rootMenuItem = new ApplicationMenuItem("CurrencyManagment", l["Menu:CurrencyManagment"]);
+        //var rootMenuItem = new ApplicationMenuItem("CurrencyManagment", l["Menu:CurrencyManagment"]);
 
-        if (await context.IsGrantedAsync(CurrencyManagmentPermissions.Currencies.Default))
-        {
-            //Add main menu items.
-            rootMenuItem.AddItem(new ApplicationMenuItem(CurrencyManagmentMenus.Prefix, displayName: l["Menu:CurrencyManagment"], "~/CurrencyManagment", icon: "fa fa-globe"));
-        }
-        context.Menu.AddItem(rootMenuItem);
+        //if (await context.IsGrantedAsync(CurrencyManagmentPermissions.Currencies.Default))
+        //{
+        //    //Add main menu items.
+        //    rootMenuItem.AddItem(new ApplicationMenuItem(CurrencyManagmentMenus.Prefix, displayName: l["Menu:CurrencyManagment"], "~/CurrencyManagment", icon: "fa fa-globe"));
+        //}
+        //context.Menu.AddItem(rootMenuItem);
+        return Task.CompletedTask;
     }
 }

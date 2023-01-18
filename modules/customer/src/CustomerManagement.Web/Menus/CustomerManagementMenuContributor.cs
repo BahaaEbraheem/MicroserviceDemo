@@ -19,7 +19,7 @@ public class CustomerManagementMenuContributor : IMenuContributor
         var l = context.GetLocalizer<CustomerManagementResource>();
 
         //Add main menu items.
-        context.Menu.AddItem(new ApplicationMenuItem(CustomerManagementMenus.Prefix, displayName: l["Menu:CustomerManagement"] , "~/CustomerManagement", icon: "fa fa-globe"));
+        //context.Menu.AddItem(new ApplicationMenuItem(CustomerManagementMenus.Prefix, displayName: l["Menu:CustomerManagement"] , "~/CustomerManagement", icon: "fa fa-globe"));
 
         return Task.CompletedTask;
     }

@@ -22,21 +22,20 @@ public class RemittanceManagementMenuContributor : IMenuContributor
     {
         var l = context.GetLocalizer<RemittanceManagementResource>();
 
-        //var RMSMenu = new ApplicationMenuItem(RemittanceManagementMenus.RemittancesStatus, l["Menu:RemittancesStatus"]);
         var rootMenuItem = new ApplicationMenuItem("RemittanceManagement", l["Menu:RemittanceManagement"]);
         if (await context.IsGrantedAsync(RemittanceManagementPermissions.Remittances.Default))
         {
-            rootMenuItem.AddItem(new ApplicationMenuItem("Remittances", l["Menu:Remittances"], "~/RemittanceManagement"));
+            rootMenuItem.AddItem(new ApplicationMenuItem("Remittances", l["Menu:Remittances"], "~/RemittanceManagement", icon: "fa fa-globe"));
         
         if (await context.IsGrantedAsync(RemittanceManagementPermissions.Remittances.Approved))
         {
-            rootMenuItem.AddItem(new ApplicationMenuItem("Remittances", l["Menu:RemittanceForSupervisor"], "~/RemittanceForSupervisor"));
+            rootMenuItem.AddItem(new ApplicationMenuItem("Remittances", l["Menu:RemittanceForSupervisor"], "~/RemittanceForSupervisor", icon: "fa fa-globe"));
         }
         if (await context.IsGrantedAsync(RemittanceManagementPermissions.Remittances.Released))
         {
-            rootMenuItem.AddItem(new ApplicationMenuItem("Remittances", l["Menu:RemittanceForReleaser"], "~/RemittanceForReleaser"));
+            rootMenuItem.AddItem(new ApplicationMenuItem("Remittances", l["Menu:RemittanceForReleaser"], "~/RemittanceForReleaser", icon: "fa fa-globe"));
         }
-            rootMenuItem.AddItem(new ApplicationMenuItem("Remittances", l["Menu:RemittanceStatusForAll"], "~/RemittanceStatus"));
+            rootMenuItem.AddItem(new ApplicationMenuItem("Remittances", l["Menu:RemittanceStatusForAll"], "~/RemittanceStatus", icon: "fa fa-globe"));
         }
         
         context.Menu.AddItem(rootMenuItem);
