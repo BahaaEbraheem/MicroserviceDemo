@@ -1,0 +1,111 @@
+{
+  "folders": {
+    "items": {
+      "src": {},
+      "test": {},
+      "host": {}
+    }
+  },
+  "packages": {
+    "AmlManagement.Domain.Shared": {
+      "path": "src/AmlManagement.Domain.Shared/AmlManagement.Domain.Shared.abppkg.json",
+      "folder": "src"
+    },
+    "AmlManagement.Domain": {
+      "path": "src/AmlManagement.Domain/AmlManagement.Domain.abppkg.json",
+      "folder": "src"
+    },
+    "AmlManagement.Application.Contracts": {
+      "path": "src/AmlManagement.Application.Contracts/AmlManagement.Application.Contracts.abppkg.json",
+      "folder": "src"
+    },
+    "AmlManagement.Application": {
+      "path": "src/AmlManagement.Application/AmlManagement.Application.abppkg.json",
+      "folder": "src"
+    },
+    "AmlManagement.EntityFrameworkCore": {
+      "path": "src/AmlManagement.EntityFrameworkCore/AmlManagement.EntityFrameworkCore.abppkg.json",
+      "folder": "src"
+    },
+    "AmlManagement.MongoDB": {
+      "path": "src/AmlManagement.MongoDB/AmlManagement.MongoDB.abppkg.json",
+      "folder": "src"
+    },
+    "AmlManagement.HttpApi": {
+      "path": "src/AmlManagement.HttpApi/AmlManagement.HttpApi.abppkg.json",
+      "folder": "src"
+    },
+    "AmlManagement.HttpApi.Client": {
+      "path": "src/AmlManagement.HttpApi.Client/AmlManagement.HttpApi.Client.abppkg.json",
+      "folder": "src"
+    },
+    "AmlManagement.TestBase": {
+      "path": "test/AmlManagement.TestBase/AmlManagement.TestBase.abppkg.json",
+      "folder": "test"
+    },
+    "AmlManagement.EntityFrameworkCore.Tests": {
+      "path": "test/AmlManagement.EntityFrameworkCore.Tests/AmlManagement.EntityFrameworkCore.Tests.abppkg.json",
+      "folder": "test"
+    },
+    "AmlManagement.MongoDB.Tests": {
+      "path": "test/AmlManagement.MongoDB.Tests/AmlManagement.MongoDB.Tests.abppkg.json",
+      "folder": "test"
+    },
+    "AmlManagement.Domain.Tests": {
+      "path": "test/AmlManagement.Domain.Tests/AmlManagement.Domain.Tests.abppkg.json",
+      "folder": "test"
+    },
+    "AmlManagement.Application.Tests": {
+      "path": "test/AmlManagement.Application.Tests/AmlManagement.Application.Tests.abppkg.json",
+      "folder": "test"
+    },
+    "AmlManagement.HttpApi.Host": {
+      "path": "host/AmlManagement.HttpApi.Host/AmlManagement.HttpApi.Host.abppkg.json",
+      "folder": "host"
+    },
+    "AmlManagement.Web": {
+      "path": "src/AmlManagement.Web/AmlManagement.Web.abppkg.json",
+      "folder": "src"
+    },
+    "AmlManagement.HttpApi.Client.ConsoleTestApp": {
+      "path": "test/AmlManagement.HttpApi.Client.ConsoleTestApp/AmlManagement.HttpApi.Client.ConsoleTestApp.abppkg.json",
+      "folder": "test"
+    },
+    "AmlManagement.Web.Host": {
+      "path": "host/AmlManagement.Web.Host/AmlManagement.Web.Host.abppkg.json",
+      "folder": "host"
+    },
+    "AmlManagement.IdentityServer": {
+      "path": "host/AmlManagement.IdentityServer/AmlManagement.IdentityServer.abppkg.json",
+      "folder": "host"
+    },
+    "AmlManagement.Host.Shared": {
+      "path": "host/AmlManagement.Host.Shared/AmlManagement.Host.Shared.abppkg.json",
+      "folder": "host"
+    },
+    "AmlManagement.Web.Unified": {
+      "path": "host/AmlManagement.Web.Unified/AmlManagement.Web.Unified.abppkg.json",
+      "folder": "host"
+    },
+    "AmlManagement.Blazor": {
+      "path": "src/AmlManagement.Blazor/AmlManagement.Blazor.abppkg.json",
+      "folder": "src"
+    },
+    "AmlManagement.Blazor.Host": {
+      "path": "host/AmlManagement.Blazor.Host/AmlManagement.Blazor.Host.abppkg.json",
+      "folder": "host"
+    },
+    "AmlManagement.Blazor.Server": {
+      "path": "src/AmlManagement.Blazor.Server/AmlManagement.Blazor.Server.abppkg.json",
+      "folder": "src"
+    },
+    "AmlManagement.Blazor.WebAssembly": {
+      "path": "src/AmlManagement.Blazor.WebAssembly/AmlManagement.Blazor.WebAssembly.abppkg.json",
+      "folder": "src"
+    },
+    "AmlManagement.Blazor.Server.Host": {
+      "path": "host/AmlManagement.Blazor.Server.Host/AmlManagement.Blazor.Server.Host.abppkg.json",
+      "folder": "host"
+    }
+  }
+}

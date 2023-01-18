@@ -67,6 +67,14 @@ namespace RemittanceManagement.Remittances
 
            
         }
+        public async Task UpdateAsync(Remittance remittance)
+        {
+            await _remittanceRepository.UpdateAsync(remittance);
+        }
+        public async Task<Remittance> GetAsync(Guid id)
+        {
+            return await _remittanceRepository.GetAsync(id);
+        }
 
         public async Task<Remittance> UpdateAsync(Remittance remittance ,double amount, RemittanceType type,
             string receiverFullName,[NotNull] Guid currencyId)
@@ -85,6 +93,6 @@ namespace RemittanceManagement.Remittances
             return remittance;
         }
 
-
+   
     }
 }

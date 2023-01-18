@@ -1,0 +1,16 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <Import Project="..\..\common.props" />
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <RootNamespace>AmlManagement</RootNamespace>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Volo.Abp.Ddd.Domain" Version="5.0.0" />
+    <ProjectReference Include="..\..\..\..\shared\MsDemo.Shared\MsDemo.Shared.csproj" />
+    <ProjectReference Include="..\AmlManagement.Domain.Shared\AmlManagement.Domain.Shared.csproj" />
+  </ItemGroup>
+
+</Project>

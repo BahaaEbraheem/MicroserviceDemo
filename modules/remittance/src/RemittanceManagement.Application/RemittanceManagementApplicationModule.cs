@@ -4,6 +4,7 @@ using Volo.Abp.Modularity;
 using Volo.Abp.Application;
 using CurrencyManagment;
 using CustomerManagement;
+using Volo.Abp.EventBus.RabbitMq;
 
 namespace RemittanceManagement;
 
@@ -13,7 +14,9 @@ namespace RemittanceManagement;
     typeof(AbpDddApplicationModule),
     typeof(AbpAutoMapperModule),
     typeof(CurrencyManagmentHttpApiClientModule),
-    typeof(CustomerManagementHttpApiClientModule)
+    typeof(CustomerManagementHttpApiClientModule),
+    typeof(AbpEventBusRabbitMqModule)
+
 
     )]
 public class RemittanceManagementApplicationModule : AbpModule

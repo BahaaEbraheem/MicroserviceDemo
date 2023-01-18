@@ -37,6 +37,7 @@ using Volo.Blogging;
 using CurrencyManagment;
 using CustomerManagement;
 using RemittanceManagement;
+using AmlManagement;
 
 namespace BackendAdminAppGateway.Host
 {
@@ -64,7 +65,8 @@ namespace BackendAdminAppGateway.Host
         typeof(AbpAspNetCoreMvcUiMultiTenancyModule),
          typeof(CurrencyManagmentHttpApiModule),
          typeof(CustomerManagementHttpApiModule),
-         typeof(RemittanceManagementHttpApiModule)
+         typeof(RemittanceManagementHttpApiModule),
+         typeof(AmlManagementHttpApiModule)
     )]
     public class BackendAdminAppGatewayHostModule : AbpModule
     {

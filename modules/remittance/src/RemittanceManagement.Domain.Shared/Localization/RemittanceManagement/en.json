@@ -35,16 +35,16 @@
     "Permission:Approved": "Approved",
     "Permission:Released": "Released",
     "Permission:Ready": "Ready",
+    "Permission:CheckAml": "CheckAml",
+
 
     "Menu:RemittanceManagement": "Remittance Management",
+    "Menu:RemittanceForSupervisor": "Supervisor Remittances",
+    "Menu:RemittanceForReleaser": "Releaser Remittances",
+    "Menu:RemittanceStatusForAll": "Remittances Status",
     "RemittanceManagement": "Remittance Management",
     "Remittances": "Remittances",
     "Menu:Remittances": "Created Remittances",
-    //"Menu:ReadyRemittances": "Ready Remittances",
-    //"Menu:ApprovedRemittances": "Approved Remittances",
-    //"CreatedRemittances": "Created Remittances",
-    //"ApprovedRemittances": "Approved Remittances",
-    //"ReadyRemittances": "Ready Remittances",
 
 
     "Actions": "Actions",

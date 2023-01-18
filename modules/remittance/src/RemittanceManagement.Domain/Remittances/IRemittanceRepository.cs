@@ -4,10 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Volo.Abp.Domain.Repositories;
+using Volo.Abp.Domain.Services;
 
 namespace RemittanceManagement.Remittances
 {
-    public interface IRemittanceRepository:IRepository<Remittance, Guid>
+    public interface IRemittanceRepository:IRepository<Remittance, Guid>,IDomainService
     {
         Task<Remittance> FindBySerialNumAsync(string serialNum);
         Task<Remittance> FindRemittance_StillDraftAsync(double amount,string receiverName );

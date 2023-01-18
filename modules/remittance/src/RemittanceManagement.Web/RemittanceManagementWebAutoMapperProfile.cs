@@ -4,6 +4,7 @@ using MsDemo.Shared.Dtos;
 using RemittanceManagement.Status;
 using RemittanceManagement.Status.Dtos;
 using static RemittanceManagement.Web.Pages.RemittanceManagement.CreateModel;
+using static RemittanceManagement.Web.Pages.RemittanceForReleaser.ReleaseModel;
 
 namespace RemittanceManagement.Web;
 
@@ -51,5 +52,11 @@ public class RemittanceManagementWebAutoMapperProfile : Profile
         /* You can configure your AutoMapper mapping configuration here.
          * Alternatively, you can split your mapping configurations
          * into multiple profile classes for a better organization. */
+
+
+        CreateMap<RemittanceDto, RemittanceReleaseViewModel>();
+        CreateMap<RemittanceReleaseViewModel, RemittanceDto>().ForMember(model => model.State, option => option.Ignore());
+
+
     }
 }

@@ -1,0 +1,38 @@
+﻿@page
+@using Microsoft.Extensions.Localization
+@using AmlManagement.Localization
+@using AmlManagement.Web.Pages.AmlManagement
+@model AmlManagement.Web.Pages.AmlManagement.IndexModel
+@inject IStringLocalizer<AmlManagementResource> L
+
+@section scripts
+    {
+    <abp-script src="/Pages/AmlManagement/Index.js" />
+}
+
+<abp-card>
+    <abp-card-header>
+        <abp-row>
+            <abp-column size-md="_6">
+                <h2>@L["Remittances For Check AML"]</h2>
+            </abp-column>
+     
+        </abp-row>
+    </abp-card-header>
+    <abp-card-body>
+        <abp-table striped-rows="true" id="RemittancesTable" class="nowrap">
+            <thead>
+                <tr>
+                    <th>@L["Actions"]</th>
+                    <th>@L["SerialNumber"]</th>
+                    <th>@L["Amount"]</th>
+                    <th>@L["FirstName"]</th>
+                    <th>@L["FatherName"]</th>
+                    <th>@L["LastName"]</th>
+                    <th>@L["State"]</th>
+                    <th>@L["CreationTime"]</th>
+                </tr>
+            </thead>
+        </abp-table>
+    </abp-card-body>
+</abp-card>

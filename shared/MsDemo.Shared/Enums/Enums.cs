@@ -21,9 +21,10 @@ namespace MsDemo.Shared.Enums
 
             Draft = 1,
             Ready = 2,
-            Approved = 3,
-            Release = 4,
-
+            CheckedAML = 3,
+            Approved = 4,
+            Release = 5,
+            
 
         }
 
