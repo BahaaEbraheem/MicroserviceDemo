@@ -9,6 +9,12 @@
     "Permission:AmlManagement": "Aml Management",
     "Menu:AmlManagement": "Aml Management",
     "Permission:AmlRemittance": "Aml Remittance",
-    "Permission:Check": "Check"
+    "Permission:Check": "Check",
+    "Enum:Remittance_Status:1": "Draft",
+    "Enum:Remittance_Status:2": "Ready",
+    "Enum:Remittance_Status:3": "Approved",
+    "Enum:Remittance_Status:4": "Release",
+    "Enum:Remittance_Status:5": "AmlChecked"
+
   }
 }

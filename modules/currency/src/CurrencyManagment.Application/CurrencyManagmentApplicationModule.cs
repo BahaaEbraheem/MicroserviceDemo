@@ -2,6 +2,7 @@
 using Volo.Abp.AutoMapper;
 using Volo.Abp.Modularity;
 using Volo.Abp.Application;
+using RemittanceManagement;
 
 namespace CurrencyManagment;
 
@@ -9,7 +10,11 @@ namespace CurrencyManagment;
     typeof(CurrencyManagmentDomainModule),
     typeof(CurrencyManagmentApplicationContractsModule),
     typeof(AbpDddApplicationModule),
-    typeof(AbpAutoMapperModule)
+    typeof(AbpAutoMapperModule),
+    typeof(RemittanceManagementHttpApiClientModule)
+
+
+
     )]
 public class CurrencyManagmentApplicationModule : AbpModule
 {

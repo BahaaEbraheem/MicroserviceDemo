@@ -6,6 +6,7 @@ using RemittanceManagement.Remittances;
 using MsDemo.Shared.Dtos;
 using Volo.Abp;
 using Volo.Abp.Application.Dtos;
+using System.Collections.Generic;
 
 namespace RemittanceManagement.Remittances;
 
@@ -83,8 +84,8 @@ public class RemittanceController : RemittanceManagementController, IRemittanceA
     }
 
     [HttpGet]
-    [Route("GetListRemittancesStatusAsync")]
-    public async Task<PagedResultDto<RemittanceDto>> GetListRemittancesStatusAsync(GetRemittanceListPagedAndSortedResultRequestDto input)
+    [Route("GetListRemittancesStatus")]
+    public async Task<PagedResultDto<RemittanceDto>> GetListRemittancesStatusAsync (GetRemittanceListPagedAndSortedResultRequestDto input)
     {
         return await _remittanceAppService.GetListRemittancesStatusAsync(input);
     }
@@ -117,5 +118,13 @@ public class RemittanceController : RemittanceManagementController, IRemittanceA
     public async Task SetAmlChecked(Guid? id)
     {
         await _remittanceAppService.SetAmlChecked(id);
+    }
+
+    [HttpGet]
+    [Route("GetAllAsync")]
+    public async Task<List<RemittanceDto>> GetAllAsync()
+    {
+      return  await _remittanceAppService.GetAllAsync();
+
     }
 }

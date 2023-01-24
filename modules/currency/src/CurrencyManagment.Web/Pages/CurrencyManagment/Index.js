@@ -24,7 +24,7 @@
                             [
                                 {
                                     text: l('Update'),
-                                    //visible: abp.auth.isGranted('CurrencyManagment.Update'),
+                                    visible: abp.auth.isGranted('CurrencyManagment.Currencies.Update'),
                                     action: function (data) {
                                         debugger
                                         _updateModal.open({
@@ -34,7 +34,7 @@
                                 },
                                 {
                                     text: l('Delete'),
-                                   // visible: abp.auth.isGranted('CurrencyManagment.Delete'),
+                                    visible: abp.auth.isGranted('CurrencyManagment.Currencies.Delete'),
                                     confirmMessage: function (data) { return l('CurencyDeletionWarningMessage'); },
                                     action: function (data) {
                                         currencyManagment.currencies.currency

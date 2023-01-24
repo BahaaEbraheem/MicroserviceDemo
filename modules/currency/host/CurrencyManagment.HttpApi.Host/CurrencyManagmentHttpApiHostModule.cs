@@ -38,7 +38,8 @@ using Volo.Abp.EventBus.RabbitMq;
 using Volo.Abp.Auditing;
 using MsDemo.Shared;
 using Autofac.Core;
-
+using Volo.Abp.Http.Client.IdentityModel;
+using RemittanceManagement.Remittances;
 
 namespace CurrencyManagment;
 
@@ -54,7 +55,11 @@ namespace CurrencyManagment;
         typeof(AbpPermissionManagementEntityFrameworkCoreModule),
         typeof(AbpSettingManagementEntityFrameworkCoreModule),
         typeof(AbpAspNetCoreMultiTenancyModule),
-        typeof(AbpTenantManagementEntityFrameworkCoreModule)
+        typeof(AbpTenantManagementEntityFrameworkCoreModule),
+
+
+        typeof(AbpHttpClientIdentityModelModule)
+
 
     )]
 public class CurrencyManagmentHttpApiHostModule : AbpModule
@@ -70,7 +75,6 @@ public class CurrencyManagmentHttpApiHostModule : AbpModule
         {
             options.IsEnabled = MsDemoConsts.IsMultiTenancyEnabled;
         });
-
 
         context.Services.AddAuthentication("Bearer")
             .AddIdentityServerAuthentication(options =>

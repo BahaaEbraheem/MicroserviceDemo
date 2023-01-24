@@ -9,6 +9,7 @@ using CurrencyManagment.Samples;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.CodeAnalysis;
+using MsDemo.Shared.Dtos;
 using Volo.Abp;
 using Volo.Abp.Application.Dtos;
 namespace CurrencyManagment.Currencies;
@@ -77,6 +78,12 @@ public class CurrencyController : CurrencyManagmentController, ICurrencyAppServi
     public async Task<List<CurrencyDto>> GetAllAsync()
     {
         return await _currencyAppService.GetAllAsync();
+    }
+    [HttpGet]
+    [Route("GetRemittanceLookupAsync")]
+    public async Task<ListResultDto<RemittanceLookupDto>> GetRemittanceLookupAsync()
+    {
+        return await _currencyAppService.GetRemittanceLookupAsync();
     }
 
 

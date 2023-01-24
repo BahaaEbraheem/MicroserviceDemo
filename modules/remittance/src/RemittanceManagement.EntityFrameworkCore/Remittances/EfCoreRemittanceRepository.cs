@@ -38,7 +38,12 @@ namespace RemittanceManagement.Remittances
             return false;
          
         }
-
+        public async Task<List<Remittance>> GetAllAsync()
+        {
+            var dbSet = GetDbSetAsync();
+            var remittances = await dbSet.Result.ToListAsync();
+            return remittances;
+        }
         public async Task<List<Remittance>> GetListRemittancesStatusAsync(int skipCount, int maxResultCount, string sorting, Remittance filter)
         {
             var dbSet = await GetDbSetAsync();

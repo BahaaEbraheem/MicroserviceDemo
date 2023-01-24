@@ -1,4 +1,5 @@
-﻿using MsDemo.Shared.Dtos;
+﻿using CurrencyManagment.Currencies.Dtos;
+using MsDemo.Shared.Dtos;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -11,6 +12,8 @@ namespace RemittanceManagement.Remittances
    public interface IRemittanceAppService : IApplicationService
     {
         Task<RemittanceDto> GetAsync(Guid id);
+        Task<List<RemittanceDto>> GetAllAsync();
+
         Task<PagedResultDto<RemittanceDto>> GetListAsync(GetRemittanceListDto input);
        Task<PagedResultDto<RemittanceDto>> GetListRemittancesForCreator(GetRemittanceListPagedAndSortedResultRequestDto input);
         Task<PagedResultDto<RemittanceDto>> GetListRemittancesForSupervisor(GetRemittanceListPagedAndSortedResultRequestDto input);

@@ -65,6 +65,7 @@
     "Enum:Remittance_Status:2": "Ready",
     "Enum:Remittance_Status:3": "Approved",
     "Enum:Remittance_Status:4": "Release",
+    "Enum:Remittance_Status:5": "AmlChecked",
 
 
     //Customers

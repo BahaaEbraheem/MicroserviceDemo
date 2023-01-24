@@ -1,8 +1,8 @@
 ﻿$(function () {
     var l = abp.localization.getResource('RemittanceManagement');
     var _releaseModal = new abp.ModalManager(abp.appPath + 'RemittanceForReleaser/Release');
-    var _createReceiverModal = new abp.ModalManager(abp.appPath + 'RemittanceForReleaser/Receiver');
 
+    debugger
 
 
     var _dataTable = $('#RemittancesTableReleaser').DataTable(
@@ -26,7 +26,6 @@
                                     text: l('Release'),
                                     visible: abp.auth.isGranted('RemittanceManagement.Remittance.Released'),
                                     action: function (data) {
-                                        debugger
                                         _releaseModal.open({
                                             id: data.record.id
                                         });
@@ -64,7 +63,9 @@
                 }, {
                     title: l('State'),
                     data: "state",
-
+                    render: function (data) {
+                        return l('Enum:Remittance_Status:' + data);
+                    }
                 }, {
                     title: l('StatusDate'),
                     data: "statusDate",
@@ -94,10 +95,12 @@
     _releaseModal.onResult(function () {
         _dataTable.ajax.reload();
     });
-
-    $("#CreateNewReceiverButtonId").click(function () {
-        _createReceiverModal.open();
+    _releaseModal.onClose(function () {
+        _dataTable.ajax.reload();
     });
+
+
+
 
 
 });

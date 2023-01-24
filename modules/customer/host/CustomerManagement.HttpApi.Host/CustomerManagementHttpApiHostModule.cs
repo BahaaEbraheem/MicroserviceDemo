@@ -1,59 +1,41 @@
 using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using IdentityModel;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Cors;
-using Microsoft.AspNetCore.DataProtection;
-using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Hosting;
 using CustomerManagement.EntityFrameworkCore;
-//using CustomerManagement.MultiTenancy;
-using StackExchange.Redis;
 using Microsoft.OpenApi.Models;
 using Volo.Abp;
-using Volo.Abp.AspNetCore.Mvc.UI.MultiTenancy;
-using Volo.Abp.AspNetCore.Mvc.UI.Theme.Shared;
-using Volo.Abp.AspNetCore.Serilog;
 using Volo.Abp.AuditLogging.EntityFrameworkCore;
 using Volo.Abp.Autofac;
-using Volo.Abp.Caching;
-using Volo.Abp.Caching.StackExchangeRedis;
 using Volo.Abp.EntityFrameworkCore;
 using Volo.Abp.EntityFrameworkCore.SqlServer;
 using Volo.Abp.Localization;
 using Volo.Abp.Modularity;
 using Volo.Abp.MultiTenancy;
 using Volo.Abp.PermissionManagement.EntityFrameworkCore;
-using Volo.Abp.Security.Claims;
 using Volo.Abp.SettingManagement.EntityFrameworkCore;
-using Volo.Abp.Swashbuckle;
 using Volo.Abp.TenantManagement.EntityFrameworkCore;
-using Volo.Abp.VirtualFileSystem;
 using MsDemo.Shared;
 using Volo.Abp.Threading;
 using Volo.Abp.Data;
 using Volo.Abp.Auditing;
-using Microsoft.AspNetCore.Cors.Infrastructure;
+using Volo.Abp.AspNetCore.MultiTenancy;
+using Volo.Abp.AspNetCore.Mvc;
+using Volo.Abp.EventBus.RabbitMq;
 
 namespace CustomerManagement;
 [DependsOn(
     typeof(CustomerManagementApplicationModule),
     typeof(CustomerManagementEntityFrameworkCoreModule),
     typeof(CustomerManagementHttpApiModule),
-    typeof(AbpAspNetCoreMvcUiMultiTenancyModule),
     typeof(AbpAutofacModule),
-    typeof(AbpCachingStackExchangeRedisModule),
-    typeof(AbpEntityFrameworkCoreSqlServerModule),
-    typeof(AbpAuditLoggingEntityFrameworkCoreModule),
-    typeof(AbpPermissionManagementEntityFrameworkCoreModule),
-    typeof(AbpSettingManagementEntityFrameworkCoreModule),
-    typeof(AbpTenantManagementEntityFrameworkCoreModule),
-    typeof(AbpAspNetCoreSerilogModule),
-    typeof(AbpSwashbuckleModule)
+        typeof(AbpAspNetCoreMvcModule),
+        typeof(AbpEventBusRabbitMqModule),
+        typeof(AbpEntityFrameworkCoreSqlServerModule),
+        typeof(AbpAuditLoggingEntityFrameworkCoreModule),
+        typeof(AbpPermissionManagementEntityFrameworkCoreModule),
+        typeof(AbpSettingManagementEntityFrameworkCoreModule),
+        typeof(AbpAspNetCoreMultiTenancyModule),
+        typeof(AbpTenantManagementEntityFrameworkCoreModule)
     )]
 public class CustomerManagementHttpApiHostModule : AbpModule
 {
@@ -109,32 +91,6 @@ public class CustomerManagementHttpApiHostModule : AbpModule
         //var redis = ConnectionMultiplexer.Connect(configuration["Redis:Configuration"]);
         //context.Services.AddDataProtection()
         //    .PersistKeysToStackExchangeRedis(redis, "MsDemo-DataProtection-Keys");
-
-
-
-
-    
-
-    //context.Services.AddCors(options =>
-    //    {
-    //        options.AddDefaultPolicy(builder =>
-    //        {
-    //            builder
-    //                .WithOrigins(
-    //                    configuration["App:CorsOrigins"]
-    //                        .Split(",", StringSplitOptions.RemoveEmptyEntries)
-    //                        .Select(o => o.Trim().RemovePostFix("/"))
-    //                        .ToArray()
-    //                )
-    //                .WithAbpExposedHeaders()
-    //                .SetIsOriginAllowedToAllowWildcardSubdomains()
-    //                .AllowAnyHeader()
-    //                .AllowAnyMethod()
-    //                .AllowCredentials();
-    //        });
-    //    });
-
-
 
     }
 

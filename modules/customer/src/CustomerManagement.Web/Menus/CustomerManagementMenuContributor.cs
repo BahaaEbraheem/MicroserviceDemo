@@ -1,4 +1,5 @@
 ﻿using CustomerManagement.Localization;
+using CustomerManagement.Permissions;
 using System.Threading.Tasks;
 using Volo.Abp.UI.Navigation;
 
@@ -14,13 +15,18 @@ public class CustomerManagementMenuContributor : IMenuContributor
         }
     }
 
-    private Task ConfigureMainMenuAsync(MenuConfigurationContext context)
+    private async Task ConfigureMainMenuAsync(MenuConfigurationContext context)
     {
         var l = context.GetLocalizer<CustomerManagementResource>();
+        var rootMenuItem = new ApplicationMenuItem(CustomerManagementMenus.Prefix, displayName: l["Menu:CustomerManagement"]);
 
+        if (await context.IsGrantedAsync(CustomerManagementPermissions.Customers.Default))
+        {
+            //Add main menu items.
+            rootMenuItem.AddItem(new ApplicationMenuItem(CustomerManagementMenus.Prefix, displayName: l["Menu:CustomerManagement"], "~/CustomerManagement", icon: "fa fa-globe"));
+        }
+        context.Menu.AddItem(rootMenuItem);
         //Add main menu items.
-        context.Menu.AddItem(new ApplicationMenuItem(CustomerManagementMenus.Prefix, displayName: l["Menu:CustomerManagement"] , "~/CustomerManagement", icon: "fa fa-globe"));
 
-        return Task.CompletedTask;
     }
 }

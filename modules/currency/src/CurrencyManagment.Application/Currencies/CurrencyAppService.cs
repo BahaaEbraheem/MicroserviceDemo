@@ -21,6 +21,8 @@ using System.Xml.Linq;
 using System.Reflection;
 using static CurrencyManagment.Permissions.CurrencyManagmentPermissions;
 using Volo.Abp.Authorization.Permissions;
+using MsDemo.Shared.Dtos;
+using RemittanceManagement.Remittances;
 //using Currency.Remittances;
 
 namespace CurrencyManagment.Currencies
@@ -36,11 +38,13 @@ namespace CurrencyManagment.Currencies
         ICurrencyAppService //implement the ICurrencyAppService
     {
         private readonly ICurrencyRepository _currencyRepository;
+        private readonly IRemittanceAppService _remittanceAppService;
         private readonly IPermissionChecker _permissionChecker;
         private readonly CurrencyManager _currencyManager;
         public CurrencyAppService(
 
             ICurrencyRepository currencyRepository,
+            IRemittanceAppService remittanceAppService,
             IPermissionChecker permissionChecker,
             CurrencyManager currencyManager)
     : base(currencyRepository)
@@ -48,9 +52,20 @@ namespace CurrencyManagment.Currencies
             _permissionChecker = permissionChecker;
             _currencyRepository = currencyRepository;
             _currencyManager = currencyManager;
+            _remittanceAppService = remittanceAppService;
         }
+        public override Task<CurrencyDto> GetAsync(Guid id)
+        {
+            return base.GetAsync(id);
+        }
+        public   async Task<ListResultDto<RemittanceLookupDto>> GetRemittanceLookupAsync()
+        {
+            var currencies =await _remittanceAppService.GetAllAsync();
 
-
+            return (new ListResultDto<RemittanceLookupDto>(
+                ObjectMapper.Map<List<RemittanceDto>, List<RemittanceLookupDto>>( currencies)
+            ));
+        }
 
         public override async Task<PagedResultDto<CurrencyDto>> GetListAsync(CurrencyPagedAndSortedResultRequestDto input)
         {
@@ -79,7 +94,7 @@ namespace CurrencyManagment.Currencies
             var existingCurrency = FindByNameAndSymbolAsync(input.Name, input.Symbol).Result;
             if (existingCurrency != null)
             {
-                throw new CurrencyAlreadyExistsException(existingCurrency.Name);
+                throw new UserFriendlyException("Currency Exist Befor");
             }
             return await base.CreateAsync(input);
         }
@@ -87,7 +102,7 @@ namespace CurrencyManagment.Currencies
 
 
 
-      //  [Authorize(CurrencyManagmentPermissions.Currencies.Edit)]
+       [Authorize(CurrencyManagmentPermissions.Currencies.Update)]
         public override async Task<CurrencyDto> UpdateAsync(Guid id, CreateUpdateCurrencyDto input)
         {
 
@@ -108,12 +123,18 @@ namespace CurrencyManagment.Currencies
 
 
 
-      //  [Authorize(CurrencyManagmentPermissions.Currencies.Delete)]
-        public override Task DeleteAsync(Guid id)
+        [Authorize(CurrencyManagmentPermissions.Currencies.Delete)]
+        public override async Task DeleteAsync(Guid id)
         {
             //check if this currency using by any remittance
-             _currencyManager.IsCurrencyUsedBeforInRemittance(id);
-            return base.DeleteAsync(id);
+            var remittancequeryable = await _remittanceAppService.GetAllAsync();
+            var remittance = remittancequeryable.Where(a => a.CurrencyId == id).FirstOrDefault();
+            if (remittance != null)
+            {
+                string remittanceSerial = remittance.SerialNumber;
+                throw new UserFriendlyException("Currency Used By Saving Remittance");
+            }
+            await base.DeleteAsync(id);
         }
 
         public async Task<CurrencyDto> FindByNameAndSymbolAsync(string name, string symbol)
@@ -138,16 +159,8 @@ namespace CurrencyManagment.Currencies
       public async Task<List<CurrencyDto>> GetFromReposListAsync(int skipCount, int maxResultCount, string sorting, CurrencyDto filter)
         {
             var currencies = new List<Currency>();
-            //if (filter.Code == null && filter.Name==null && filter.Symbol==null)
-            //{
-            //     currencies =  _currencyRepository.GetAllAsync();
-            //}
-            //else
-            //{
             var filter_ = ObjectMapper.Map<CurrencyDto, Currency>(filter);
             currencies =await _currencyRepository.GetFromReposListAsync(skipCount, maxResultCount, sorting, filter_);
-
-            //}
            return  ObjectMapper.Map<List<Currency>, List<CurrencyDto>>(currencies);
         }
     }

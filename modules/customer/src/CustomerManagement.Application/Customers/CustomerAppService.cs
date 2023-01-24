@@ -18,7 +18,7 @@ using Volo.Abp.Users;
 
 namespace CustomerManagement.Customers
 {
-    //[Authorize(CustomerManagementPermissions.Customers.Default)]
+   [Authorize(CustomerManagementPermissions.Customers.Default)]
 
     public class CustomerAppService :
         CrudAppService<
@@ -52,7 +52,7 @@ namespace CustomerManagement.Customers
             return new PagedResultDto<CustomerDto>(totalCount,customers);
         }
 
-       // [Authorize(CustomerManagementPermissions.Customers.Create)]
+        [Authorize(CustomerManagementPermissions.Customers.Create)]
         public override Task<CustomerDto> CreateAsync(CreateUpdateCustomerDto input)
         {
             try
@@ -74,7 +74,7 @@ namespace CustomerManagement.Customers
 
 
 
-      //  [Authorize(CustomerManagementPermissions.Customers.Edit)]
+        [Authorize(CustomerManagementPermissions.Customers.Update)]
         public override Task<CustomerDto> UpdateAsync(Guid id, CreateUpdateCustomerDto input)
         {
             try
@@ -94,18 +94,17 @@ namespace CustomerManagement.Customers
         }
 
 
-       // [Authorize(CustomerManagementPermissions.Customers.Delete)]
-        public override Task DeleteAsync(Guid id)
+        [Authorize(CustomerManagementPermissions.Customers.Delete)]
+        public override async Task DeleteAsync(Guid id)
         {
             try
             {
                 if (!id.Equals(null))
                 {
-                    _customerManager.IsCustomerUsedBeforInRemittance(id);
+                   await _customerManager.IsCustomerUsedBeforInRemittance(id);
 
-                    return base.DeleteAsync(id);
+                    await base.DeleteAsync(id);
                 }
-                throw new ArgumentNullException(nameof(id));
             }
             catch (Exception)
             {

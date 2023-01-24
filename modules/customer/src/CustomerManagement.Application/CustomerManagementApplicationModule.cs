@@ -2,6 +2,7 @@
 using Volo.Abp.AutoMapper;
 using Volo.Abp.Modularity;
 using Volo.Abp.Application;
+using RemittanceManagement;
 
 namespace CustomerManagement;
 
@@ -9,9 +10,12 @@ namespace CustomerManagement;
     typeof(CustomerManagementDomainModule),
     typeof(CustomerManagementApplicationContractsModule),
     typeof(AbpDddApplicationModule),
-    typeof(AbpAutoMapperModule)
-    
-    
+    typeof(AbpAutoMapperModule),
+    typeof(RemittanceManagementHttpApiClientModule)
+
+
+
+
     )]
 public class CustomerManagementApplicationModule : AbpModule
 {
