@@ -2,24 +2,48 @@
 @using RemittanceManagement.Localization
 @model RemittanceManagement.Web.Pages.RemittanceForReleaser.ReleaseModel
 @using Microsoft.Extensions.Localization
+@using RemittanceManagement.Remittances;
+@using RemittanceManagement.Web.Pages.RemittanceForReleaser;
 @using Volo.Abp.AspNetCore.Mvc.UI.Bootstrap.TagHelpers.Modal
 @using Microsoft.AspNetCore.Mvc.Localization
+
 @inject IStringLocalizer<RemittanceManagementResource> L
 @{
     Layout = null;
 }
 
+
+
 @section scripts
     {
     <abp-script src="/Pages/RemittanceForReleaser/Index.js" />
-}
-<abp-dynamic-form abp-model="Remittance" asp-page="/RemittanceForReleaser/Release">
+    }
+    <abp-dynamic-form abp-model="Remittance" asp-page="/RemittanceForReleaser/Release">
     <abp-modal size="@(AbpModalSize.Large)">
         <abp-modal-header title="@L["Release"].Value"></abp-modal-header>
         <abp-modal-body>
             <abp-form-content />
-            <abp-button icon="plus" text="@L["CreateNewReceiver"].Value" button-type="Success" id="CreateNewReceiverButtonId"></abp-button>
-        </abp-modal-body>
+                </abp-modal-body>
 <abp-modal-footer buttons="@(AbpModalButtons.Cancel|AbpModalButtons.Save)"></abp-modal-footer>
     </abp-modal>
+
+
 </abp-dynamic-form>
+@*    <script>
+        $(document).ready(function() {
+
+        var x=  document.getElementsByClassName("modal-body")[0];
+        var objects = document.getElementsByClassName("modal-body");
+
+        var _createModal = new abp.ModalManager(abp.appPath + 'RemittanceForReleaser/Receiver');
+        var _releaseModal = new abp.ModalManager(abp.appPath + 'RemittanceForReleaser/Release');
+
+    $('#CreateNewReceiverButtonId').click(function (e) {
+        debugger
+        e.preventDefault();
+            _releaseModal.close();
+        _createModal.open();
+    });
+
+    });
+    </script>*@

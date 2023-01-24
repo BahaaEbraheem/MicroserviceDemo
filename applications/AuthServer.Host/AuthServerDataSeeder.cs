@@ -213,8 +213,8 @@ namespace AuthServer.Host
                     "ProductService", "RemittanceService","CurrencyService","CustomerService","AmlService", "TenantManagementService" }),
                 new[] { "hybrid" },
                 commonSecret,
-                permissions: new[] { IdentityPermissions.Users.Default, "ProductManagement.Product", "RemittanceManagement.Remittance", 
-                    "AmlManagement.AmlRemittance" },
+                permissions: new[] { IdentityPermissions.Users.Default, "ProductManagement.Product", "RemittanceManagement.Remittance","CurrencyManagment.Currencies",
+                "CustomerManagement.Customers","AmlManagement.AmlRemittance" },
                 redirectUri: "https://localhost:44354/signin-oidc",
                 postLogoutRedirectUri: "https://localhost:44354/signout-callback-oidc"
             );
@@ -242,6 +242,20 @@ namespace AuthServer.Host
               commonSecret,
               permissions: new[] { "CurrencyManagment.Currencies", "CustomerManagement.Customers" }
           );
+            await CreateClientAsync(
+            "currency-service-client",
+            new[] { "InternalGateway", "IdentityService" },
+            new[] { "client_credentials" },
+            commonSecret,
+            permissions: new[] { "CurrencyManagment.Currencies" }
+        );
+            await CreateClientAsync(
+          "customer-service-client",
+          new[] { "InternalGateway", "IdentityService" },
+          new[] { "client_credentials" },
+          commonSecret,
+          permissions: new[] { "CustomerManagement.Customers" }
+      );
             await CreateClientAsync(
             "aml-service-client",
             new[] { "InternalGateway", "IdentityService", "RemittanceService" },

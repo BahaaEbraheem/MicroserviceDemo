@@ -6,6 +6,9 @@
 @using CustomerManagement.Web.Pages.CustomerManagement
 @model CustomerManagement.Web.Pages.CustomerManagement.IndexModel
 @inject IStringLocalizer<CustomerManagementResource> L
+@using Microsoft.AspNetCore.Authorization
+@inject IAuthorizationService AuthorizationService
+@using CustomerManagement.Permissions
 @section scripts
 {
     <abp-script src="/Pages/CustomerManagement/Index.js" />
@@ -18,10 +21,10 @@
                     <h2>@L["Customers"]</h2>
                 </abp-column>
                 <abp-column size-md="_6" class="text-right">
-                @*@if (await Authorization.IsGrantedAsync(ProductManagementPermissions.Products.Create))
-                {*@
+                @if (await AuthorizationService.IsGrantedAsync(CustomerManagementPermissions.Customers.Create))
+                {
                     <abp-button icon="plus" text="@L["CreateNewCustomer"].Value" button-type="Primary" id="CreateNewCustomerButtonId"></abp-button>
-               @* }*@
+                }
             </abp-column>
         </abp-row>
         </abp-card-header>

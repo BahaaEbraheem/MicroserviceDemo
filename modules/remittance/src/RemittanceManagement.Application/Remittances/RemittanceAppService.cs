@@ -90,7 +90,7 @@ public class RemittanceAppService : RemittanceManagementAppService ,IRemittanceA
                         var checkAge = DateTime.Now.Year - customer.BirthDate.Year;
                         if ((customer.BirthDate > DateTime.Now) || (checkAge < 18))
                         {
-                            throw new CustomerDontPassBecauseHisAgeSmallerThan18Exception(customer.FirstName + " " + customer.LastName);
+                            throw new UserFriendlyException("Sender Age Smaller Than 18");
                         }
                     }
                 }
@@ -109,13 +109,17 @@ public class RemittanceAppService : RemittanceManagementAppService ,IRemittanceA
                     var currency = await _currencyAppService.GetAsync(input.CurrencyId);
                     if (currency == null || currency.Name == "Syrian Pound")
                     {
-                        throw new Exception("The Currency Should Not Be Syrian Pound");
+                        throw new UserFriendlyException("The Currency Should Not Be Syrian Pound");
                     }
                 }
                 //check if Remittance contain Receiver Customer
                 if (input.ReceiverBy != null)
                 {
-                    throw new Exception("The Receiver Customer Should be passed on Release Remittance no in Created Remittance");
+                    throw new UserFriendlyException("The Receiver Customer Should be passed on Release Remittance no in Created Remittance");
+                }
+                if (input.Amount ==0 || input.Amount < 0)
+                {
+                    throw new UserFriendlyException("The Amount Should Not Be Zero Or Smaller");
                 }
                 var remittance = await _remittanceManager.CreateAsync(
                  input.Amount, input.Type,
@@ -144,7 +148,7 @@ public class RemittanceAppService : RemittanceManagementAppService ,IRemittanceA
 
     }
 
-    //[Authorize(RemittanceManagementPermissions.Remittances.Delete)]
+    [Authorize(RemittanceManagementPermissions.Remittances.Delete)]
 
     public async Task DeleteAsync(Guid id)
     {
@@ -168,7 +172,7 @@ public class RemittanceAppService : RemittanceManagementAppService ,IRemittanceA
         try
         {
             //Get the IQueryable<Remittance> from the repository
-            var queryable =  _remittanceRepository.GetQueryableAsync().Result;
+            var queryable =  _remittanceRepository.GetQueryableAsync().Result.Where(a=>a.Id==id);
 
 
             //var currencyequeryable = GetCurrencyLookupAsync().Result.Items.AsQueryable().ToList();
@@ -264,13 +268,17 @@ public class RemittanceAppService : RemittanceManagementAppService ,IRemittanceA
 
 
 
-    //[Authorize(RemittanceManagementPermissions.Remittances.Edit)]
+    [Authorize(RemittanceManagementPermissions.Remittances.Update)]
     public async Task UpdateAsync(Guid id, UpdateRemittanceDto input)
     {
         try
         {
-            if (id.Equals(null) && input != null)
+            if (!id.Equals(null) && input != null)
             {
+                if (input.Amount == 0 || input.Amount<0)
+                {
+                    throw new UserFriendlyException("The Amount Should Not Be Zero Or Smaller");
+                }
                 var remittanceStatus = await _remittanceStatusManager.UpdateAsync(id);
                 if (remittanceStatus != null && remittanceStatus.State == Remittance_Status.Draft)
                 {
@@ -283,7 +291,7 @@ public class RemittanceAppService : RemittanceManagementAppService ,IRemittanceA
                             var checkAge = DateTime.Now.Year - customer.BirthDate.Year;
                             if ((customer.BirthDate > DateTime.Now) || (checkAge < 18))
                             {
-                                throw new CustomerDontPassBecauseHisAgeSmallerThan18Exception(customer.FirstName + " " + customer.LastName);
+                                throw new UserFriendlyException("Sender Age Smaller Than 18");
                             }
                         }
 
@@ -294,7 +302,7 @@ public class RemittanceAppService : RemittanceManagementAppService ,IRemittanceA
                         var currency = await _currencyAppService.GetAsync(input.CurrencyId);
                         if (currency == null || currency.Name != "Syrian Pound")
                         {
-                            throw new Exception("The Currency Must Be Syrian Pound Exeption");
+                            throw new UserFriendlyException("The Currency Must Be Syrian Pound Exeption");
                         }
                     }
                     else if (!input.CurrencyId.Equals(null) && input.Type == RemittanceType.External)
@@ -302,13 +310,13 @@ public class RemittanceAppService : RemittanceManagementAppService ,IRemittanceA
                         var currency = await _currencyAppService.GetAsync(input.CurrencyId);
                         if (currency == null || currency.Name == "Syrian Pound")
                         {
-                            throw new Exception("The Currency Should Not Be Syrian Pound");
+                            throw new UserFriendlyException("The Currency Should Not Be Syrian Pound");
                         }
                     }
                     //check if Remittance contain Receiver Customer
                     if (input.ReceiverBy != null)
                     {
-                        throw new Exception("The Receiver Customer Should be passed on Release Remittance no in Created Remittance");
+                        throw new UserFriendlyException("The Receiver Customer Should be passed on Release Remittance no in Created Remittance");
                     }
                     var remittance = await _remittanceRepository.GetAsync(id);
                     var CheckRemittanceIfApproved = await _remittanceManager.UpdateAsync(remittance,
@@ -339,7 +347,7 @@ public class RemittanceAppService : RemittanceManagementAppService ,IRemittanceA
 
 
 
-    //[Authorize(RemittanceManagementPermissions.Status.Ready)]
+    [Authorize(RemittanceManagementPermissions.Remittances.Ready)]
 
     public async Task SetReady(RemittanceDto input)
     {
@@ -387,7 +395,7 @@ public class RemittanceAppService : RemittanceManagementAppService ,IRemittanceA
 
     }
 
-    //[Authorize(AmlManagementPermissions.AmlRemittances.Check)]
+   //[Authorize(AmlManagementPermissions.AmlRemittances.Check)]
     public async Task SetAmlChecked(Guid? id)
     {
         try
@@ -399,8 +407,6 @@ public class RemittanceAppService : RemittanceManagementAppService ,IRemittanceA
                 if (remittanceStatus != null && remittanceStatus.State == Remittance_Status.Ready)
                 {
                     remittanceStatus.State = Remittance_Status.CheckedAML;
-                    remittance.ApprovedBy = CurrentUser.Id;
-                    remittance.ApprovedDate = DateTime.Now;
                     await _remittanceRepository.UpdateAsync(remittance);
                     await _remittanceStatusRepository.InsertAsync(remittanceStatus);
                 }
@@ -416,7 +422,7 @@ public class RemittanceAppService : RemittanceManagementAppService ,IRemittanceA
 
 
 
-    //[Authorize(RemittanceManagementPermissions.Status.Approved)]
+    [Authorize(RemittanceManagementPermissions.Remittances.Approved)]
 
     public async Task SetApprove(RemittanceDto input)
     {
@@ -446,7 +452,10 @@ public class RemittanceAppService : RemittanceManagementAppService ,IRemittanceA
 
 
 
-
+    public async Task<List<RemittanceDto>> GetAllAsync()
+    {
+        return ObjectMapper.Map<List<Remittance>, List<RemittanceDto>>(await _remittanceRepository.GetAllAsync());
+    }
 
 
 
@@ -466,7 +475,8 @@ public class RemittanceAppService : RemittanceManagementAppService ,IRemittanceA
                     remittance.ReleasedBy = CurrentUser.Id;
                     remittance.ReleasedDate = DateTime.Now;
                     remittance.ReceiverBy = input.ReceiverBy;
-                    remittance.ReceiverFullName = input.ReceiverFullName;
+                    var CustomerFullName = _customerAppService.GetAsync((Guid)input.ReceiverBy).Result;
+                    remittance.ReceiverFullName = CustomerFullName.FirstName+" "+ CustomerFullName.FatherName+" "+ CustomerFullName.LastName;
                     await _remittanceRepository.UpdateAsync(remittance);
                     await _remittanceStatusRepository.InsertAsync(remittanceStatus);
                 }
@@ -594,15 +604,6 @@ public class RemittanceAppService : RemittanceManagementAppService ,IRemittanceA
             );
     }
 
-
-    //public async Task<ListResultDto<UserLookupDto>> GetUserLookupAsync()
-    //{
-    //    var users = await _userRepository.GetListAsync();
-
-    //    return new ListResultDto<UserLookupDto>(
-    //        ObjectMapper.Map<List<IdentityUser>, List<UserLookupDto>>(users)
-    //    );
-    //}
 
     public async Task<ListResultDto<CustomerLookupDto>> GetCustomerLookupAsync()
     {

@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <Import Project="..\..\common.props" />
 
@@ -9,6 +9,7 @@
 
   <ItemGroup>
     <PackageReference Include="Volo.Abp.EntityFrameworkCore" Version="5.0.0" />
+    <ProjectReference Include="..\..\..\currency\src\CurrencyManagment.Domain\CurrencyManagment.Domain.csproj" />
     <ProjectReference Include="..\RemittanceManagement.Domain\RemittanceManagement.Domain.csproj" />
   </ItemGroup>
 

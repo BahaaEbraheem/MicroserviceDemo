@@ -1,5 +1,7 @@
 ﻿//using MicroserviceDemo.CurrencyManagement.Customers;
 //using CustomerManagement.Remittances;
+using MsDemo.Shared.Dtos;
+using RemittanceManagement.Remittances;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
@@ -14,31 +16,31 @@ namespace CustomerManagement.Customers
    public class CustomerManager : DomainService
     {
         private readonly ICustomerRepository _CustomerRepository;
-        //private readonly IRemittanceRepository _remittanceRepository;
+        private readonly IRemittanceAppService _remittanceRepository;
 
 
-        public CustomerManager(ICustomerRepository CustomerRepository
-            /*IRemittanceRepository remittanceRepository*/)
+        public CustomerManager(ICustomerRepository CustomerRepository,
+            IRemittanceAppService remittanceRepository)
         {
             _CustomerRepository = CustomerRepository;
-            //_remittanceRepository = remittanceRepository;
+            _remittanceRepository = remittanceRepository;
         }
 
 
 
-        public Task IsCustomerUsedBeforInRemittance(Guid id)
+        public async Task IsCustomerUsedBeforInRemittance(Guid id)
         {
             Check.NotNull(id, nameof(id));
-            //var remittancequeryable = _remittanceRepository.GetQueryableAsync().Result.ToList();
-            //var remittance = remittancequeryable.Where(a =>( a.SenderBy == id || a.ReceiverBy==id) && a.IsDeleted == false).FirstOrDefault();
-            //if (remittance != null)
-            //{
-            //    var firstName= _CustomerRepository.GetAsync(id).Result.FirstName;
-            //    var lastName= _CustomerRepository.GetAsync(id).Result.LastName;
-            //    var customerName=firstName +" "+ lastName;
-            //    throw new CustomerAlreadyUsedInRemittanceException(customerName);
-            //}
-            return Task.CompletedTask;
+            var remittancequeryable = await _remittanceRepository.GetListAsync(new GetRemittanceListDto());
+            var remittance = remittancequeryable.Items.Where(a => (a.SenderBy == id || a.ReceiverBy == id) ).FirstOrDefault();
+            if (remittance != null)
+            {
+                var firstName = _CustomerRepository.GetAsync(id).Result.FirstName;
+                var lastName = _CustomerRepository.GetAsync(id).Result.LastName;
+                var customerName = firstName + " " + lastName;
+                throw new UserFriendlyException("this Customer Used Befor In Remittance") ;
+            }
+            await Task.CompletedTask;
         }
 
     }

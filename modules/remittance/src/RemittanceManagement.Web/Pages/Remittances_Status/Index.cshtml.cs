@@ -1,4 +1,4 @@
-namespace RemittanceManagement.Web.Pages.RemittanceStatus;
+namespace RemittanceManagement.Web.Pages.Remittances_Status;
 
 public class IndexModel : RemittanceManagementPageModel
 {

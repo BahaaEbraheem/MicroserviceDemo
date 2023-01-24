@@ -41,7 +41,6 @@ namespace AmlManagement.AmlHandler
 
             await _amlRemittanceManager.CreateAsync(_ObjectMapper.Map<RemittanceEto, AmlRemittance>(eventData));
 
-           
         }
 
 

@@ -24,7 +24,7 @@
                             [
                                 {
                                     text: l('Update'),
-                                    //visible: abp.auth.isGranted('CustomerManagement.Update'),
+                                    visible: abp.auth.isGranted('CustomerManagement.Customers.Update'),
                                     action: function (data) {
                                         debugger
                                         _updateModal.open({
@@ -34,7 +34,7 @@
                                 },
                                 {
                                     text: l('Delete'),
-                                   // visible: abp.auth.isGranted('CustomerManagement.Delete'),
+                                    visible: abp.auth.isGranted('CustomerManagement.Customers.Delete'),
                                     confirmMessage: function (data) { return l('CustomerDeletionWarningMessage'); },
                                     action: function (data) {
                                         customerManagement.customers.customer

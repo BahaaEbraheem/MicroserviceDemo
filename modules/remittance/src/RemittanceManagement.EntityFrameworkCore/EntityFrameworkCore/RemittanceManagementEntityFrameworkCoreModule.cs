@@ -1,4 +1,5 @@
-﻿using Microsoft.Extensions.DependencyInjection;
+﻿using CurrencyManagment.Currencies;
+using Microsoft.Extensions.DependencyInjection;
 using RemittanceManagement.Remittances;
 using RemittanceManagement.Status;
 using Volo.Abp.EntityFrameworkCore;

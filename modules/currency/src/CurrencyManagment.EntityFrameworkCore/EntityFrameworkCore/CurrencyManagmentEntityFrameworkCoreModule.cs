@@ -1,4 +1,6 @@
-﻿using Microsoft.Extensions.DependencyInjection;
+﻿using CurrencyManagment.Currencies;
+using Microsoft.Extensions.DependencyInjection;
+using RemittanceManagement.Remittances;
 using Volo.Abp.EntityFrameworkCore;
 using Volo.Abp.Modularity;
 
@@ -14,9 +16,10 @@ public class CurrencyManagmentEntityFrameworkCoreModule : AbpModule
     {
         context.Services.AddAbpDbContext<CurrencyManagmentDbContext>(options =>
         {
-                /* Add custom repositories here. Example:
-                 * options.AddRepository<Question, EfCoreQuestionRepository>();
-                 */
+            /* Add custom repositories here. Example:
+             * options.AddRepository<Question, EfCoreQuestionRepository>();
+             */
+            options.AddRepository<Currency, EfCoreCurrencyRepository>();
         });
     }
 }

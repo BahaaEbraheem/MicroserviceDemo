@@ -10,7 +10,7 @@
   <ItemGroup>
     <PackageReference Include="Volo.Abp.Http.Client" Version="5.0.0" />
     <ProjectReference Include="..\RemittanceManagement.Application.Contracts\RemittanceManagement.Application.Contracts.csproj" />
-  </ItemGroup>
+ </ItemGroup>
 
   <ItemGroup>
     <EmbeddedResource Include="**\*generate-proxy.json" />

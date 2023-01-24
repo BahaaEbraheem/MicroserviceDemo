@@ -2,10 +2,12 @@
 @using Microsoft.Extensions.Localization
 @using CurrencyManagment.Localization
 @using CurrencyManagment.Web.Pages.CurrencyManagment
+@using System.Net;
 @model CurrencyManagment.Web.Pages.CurrencyManagment.IndexModel
 @inject IStringLocalizer<CurrencyManagmentResource> L
-
-
+@using Microsoft.AspNetCore.Authorization
+@inject IAuthorizationService AuthorizationService
+@using CurrencyManagment.Permissions
 @section scripts
 {
     <abp-script src="/Pages/CurrencyManagment/Index.js" />
@@ -18,10 +20,10 @@
                     <h2>@L["Currencies"]</h2>
                 </abp-column>
                 <abp-column size-md="_6" class="text-right">
-                @*@if (await Authorization.IsGrantedAsync(ProductManagementPermissions.Products.Create))
-                {*@
+                @if (await AuthorizationService.IsGrantedAsync(CurrencyManagmentPermissions.Currencies.Create))
+                {
                     <abp-button icon="plus" text="@L["CreateNewCurrency"].Value" button-type="Primary" id="CreateNewCurrencyButtonId"></abp-button>
-               @* }*@
+                }
             </abp-column>
         </abp-row>
         </abp-card-header>

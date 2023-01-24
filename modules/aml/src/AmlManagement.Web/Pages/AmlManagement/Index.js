@@ -62,7 +62,9 @@
                 }, {
                     title: l('State'),
                     data: "state",
-
+                    render: function (data) {
+                        return l('Enum:Remittance_Status:' + data);
+                    }
                 },
 
                 {

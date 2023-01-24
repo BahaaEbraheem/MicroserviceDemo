@@ -23,7 +23,7 @@ namespace AmlManagement.Web.Menus
 
             //var RMSMenu = new ApplicationMenuItem(RemittanceManagementMenus.RemittancesStatus, l["Menu:RemittancesStatus"]);
             var rootMenuItem = new ApplicationMenuItem("AmlManagement", l["Menu:AmlManagement"]);
-            if (await context.IsGrantedAsync(AmlManagementPermissions.AmlRemittances.Default))
+            if (await context.IsGrantedAsync(AmlManagementPermissions.AmlRemittances.Check))
             {
                 rootMenuItem.AddItem(new ApplicationMenuItem("AmlRemittances", l["Menu:AmlManagement"], "~/AmlManagement"));
             }

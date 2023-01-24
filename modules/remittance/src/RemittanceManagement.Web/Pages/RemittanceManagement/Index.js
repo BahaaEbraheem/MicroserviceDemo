@@ -36,7 +36,7 @@
                                 },
                                 {
                                     text: l('Update'),
-                                    //visible: abp.auth.isGranted('CurrencyManagment.Update'),
+                                    visible: abp.auth.isGranted('RemittanceManagement.Remittance.Update'),
                                     action: function (data) {
                                         debugger
                                         _updateModal.open({
@@ -46,7 +46,7 @@
                                 },
                                 {
                                     text: l('Delete'),
-                                   // visible: abp.auth.isGranted('CurrencyManagment.Delete'),
+                                    visible: abp.auth.isGranted('RemittanceManagement.Remittance.Delete'),
                                     confirmMessage: function (data) { return l('RemittanceDeletionWarningMessage'); },
                                     action: function (data) {
                                         remittanceManagement.remittances.remittance
@@ -88,7 +88,9 @@
                 }, {
                     title: l('State'),
                     data: "state",
-
+                    render: function (data) {
+                        return l('Enum:Remittance_Status:' + data);
+                    }
                 }, {
                     title: l('StatusDate'),
                     data: "statusDate",

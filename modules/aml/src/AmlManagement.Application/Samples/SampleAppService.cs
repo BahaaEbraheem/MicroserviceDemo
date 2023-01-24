@@ -13,6 +13,7 @@ using MsDemo.Shared.Etos;
 using RemittanceManagement;
 using RemittanceManagement.Remittances;
 using RemittanceManagement.Status;
+using Volo.Abp;
 using Volo.Abp.Application.Dtos;
 using Volo.Abp.Authorization.Permissions;
 using Volo.Abp.DependencyInjection;
@@ -23,6 +24,8 @@ using static MsDemo.Shared.Enums.Enums;
 
 namespace AmlManagement.Samples
 {
+    [Authorize(AmlManagementPermissions.AmlRemittances.Default)]
+
     public class SampleAppService : AmlManagementAppService, ISampleAppService, ITransientDependency
     {
 
@@ -92,6 +95,7 @@ namespace AmlManagement.Samples
 
         }
 
+        [Authorize(AmlManagementPermissions.AmlRemittances.Check)]
 
         public async Task CheckAML(Guid id)
         {
@@ -107,7 +111,7 @@ namespace AmlManagement.Samples
                             remittance.FirstName, remittance.FatherName, remittance.LastName).Result;
                         if (amlPerson != null)
                         {
-                            throw new CustomerAmlWantedException(amlPerson.FirstName);
+                            throw new UserFriendlyException("this Customer is Aml");
                         }
 
                         remittance.State = Remittance_Status.CheckedAML;

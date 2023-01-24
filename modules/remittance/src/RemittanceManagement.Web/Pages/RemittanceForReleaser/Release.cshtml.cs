@@ -13,31 +13,35 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using System.Collections.Generic;
 using Volo.Abp.AspNetCore.Mvc.UI.Bootstrap.TagHelpers.Form;
 using MsDemo.Shared.Etos;
+using CustomerManagement.Customers;
 
 namespace RemittanceManagement.Web.Pages.RemittanceForReleaser;
 
     public class ReleaseModel : RemittanceManagementPageModel
 {
-   
-
         [BindProperty]
-        public RemittanceReleaseViewModel Remittance { get; set; } = new RemittanceReleaseViewModel();
-
+    public RemittanceReleaseViewModel Remittance { get; set; } = new RemittanceReleaseViewModel();
+    
     private readonly IRemittanceAppService _remittanceAppService;
-
+    private readonly ICurrencyAppService _currencyAppService;
+    private readonly ICustomerAppService _customerAppService;
     public List<SelectListItem> CustomerListItems { get; set; } = new List<SelectListItem>();
     public List<SelectListItem> CurrencyListItems { get; set; } = new List<SelectListItem>();
 
 
 
 
-    public ReleaseModel(IRemittanceAppService remittanceAppService)
+    public ReleaseModel(IRemittanceAppService remittanceAppService,
+        ICurrencyAppService currencyAppService
+        , ICustomerAppService customerAppService)
         {
         _remittanceAppService = remittanceAppService;
+        _currencyAppService = currencyAppService;
+        _customerAppService = customerAppService;
         }
 
-        public async Task<ActionResult> OnGetAsync(Guid id)
-           {
+    public async Task<ActionResult> OnGetAsync(Guid id)
+    {
         var CustomerList = _remittanceAppService.GetCustomerLookupAsync().Result.Items;
         foreach (var customer in CustomerList)
         {
@@ -50,7 +54,11 @@ namespace RemittanceManagement.Web.Pages.RemittanceForReleaser;
             var item = new SelectListItem { Value = currency.Id.ToString(), Text = currency.Name };
             CurrencyListItems.Add(item);
         }
+
         var remittanceDto = await _remittanceAppService.GetAsync(id);
+        remittanceDto.CurrencyName = _currencyAppService.GetAsync((Guid)remittanceDto.CurrencyId).Result.Name;
+        var Senderfullname = _customerAppService.GetAsync((Guid)remittanceDto.SenderBy).Result;
+        remittanceDto.SenderName = Senderfullname.FirstName + " " + Senderfullname.FatherName + " " + Senderfullname.LastName;
         Remittance = ObjectMapper.Map<RemittanceDto, RemittanceReleaseViewModel>(remittanceDto);
 
             return Page();
@@ -62,7 +70,8 @@ namespace RemittanceManagement.Web.Pages.RemittanceForReleaser;
         await _remittanceAppService.SetRelease(remittanceDtoAfterRelease);
             return NoContent();
         }
-        public class RemittanceReleaseViewModel
+
+    public class RemittanceReleaseViewModel
     {
         [HiddenInput]
         [Required]
@@ -71,17 +80,22 @@ namespace RemittanceManagement.Web.Pages.RemittanceForReleaser;
         public double Amount { get; set; }
         [DisabledInput]
         public RemittanceType Type { get; set; }
-
-
         [DisabledInput]
 
-        public Guid SenderBy { get; set; }
+        public string SenderName { get; set; }
+        [DisabledInput]
 
-        [SelectItems(nameof(CustomerListItems))]
-        public Guid? ReceiverBy { get; set; }
+        public string CurrencyName { get; set; }
+        [DisabledInput]
+        [HiddenInput]
+        public Guid SenderBy { get; set; }
         [DisabledInput]
         public string ReceiverFullName { get; set; }
+        [SelectItems(nameof(CustomerListItems))]
+        public Guid? ReceiverBy { get; set; }
+   
         [DisabledInput]
+        [HiddenInput]
         public Guid? CurrencyId { get; set; }
         [HiddenInput]
         public DateTime? LastModificationTime { get; set; }
@@ -107,12 +121,12 @@ namespace RemittanceManagement.Web.Pages.RemittanceForReleaser;
  
         [HiddenInput]
         public DateTime? StatusDate { get; set; }
-        [HiddenInput]
-        public string SenderName { get; set; }
+       
+
         [HiddenInput]
         public string ReceiverName { get; set; }
-        [HiddenInput]
-        public string CurrencyName { get; set; }
+   
+
 
     }
 }

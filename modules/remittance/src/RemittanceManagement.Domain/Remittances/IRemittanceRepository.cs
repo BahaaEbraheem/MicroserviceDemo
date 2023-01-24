@@ -12,7 +12,7 @@ namespace RemittanceManagement.Remittances
     {
         Task<Remittance> FindBySerialNumAsync(string serialNum);
         Task<Remittance> FindRemittance_StillDraftAsync(double amount,string receiverName );
-
+        Task<List<Remittance>> GetAllAsync();
         Task<List<Remittance>> GetListRemittancesStatusAsync(int skipCount, int maxResultCount, string sorting, Remittance filter);
         Task<int> GetTotalCountAsync(Remittance filter);
         Task<bool> IsApprovedRemittanceAsync(Remittance remittance);

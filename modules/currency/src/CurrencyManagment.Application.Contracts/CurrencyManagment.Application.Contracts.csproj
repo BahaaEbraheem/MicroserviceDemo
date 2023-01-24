@@ -10,7 +10,9 @@
   <ItemGroup>
     <PackageReference Include="Volo.Abp.Ddd.Application.Contracts" Version="5.0.0" />
     <PackageReference Include="Volo.Abp.Authorization" Version="5.0.0" />
+    <ProjectReference Include="..\..\..\..\shared\MsDemo.Shared\MsDemo.Shared.csproj" />
     <ProjectReference Include="..\CurrencyManagment.Domain.Shared\CurrencyManagment.Domain.Shared.csproj" />
+
   </ItemGroup>
 
   <ItemGroup>

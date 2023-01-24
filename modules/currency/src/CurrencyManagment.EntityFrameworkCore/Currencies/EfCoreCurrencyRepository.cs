@@ -27,6 +27,10 @@ namespace CurrencyManagment.Currencies
            && Currency.Symbol.Equals(symbol) ).Result;
             if (firstCondition != null)
                 return firstCondition;
+            var SecondCondition = dbSet.FirstOrDefaultAsync(Currency => name.Contains(Currency.Name)
+          && symbol.Contains(Currency.Symbol)).Result;
+            if (SecondCondition != null)
+                return SecondCondition;
             var existCurrency=  dbSet.FirstOrDefaultAsync(Currency =>
             (Currency.Name.Contains(name))
             && (Currency.Symbol.Contains(symbol))).Result;
