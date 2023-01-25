@@ -21,12 +21,7 @@ public class RemittanceManagementMenuContributor : IMenuContributor
     private async Task ConfigureMainMenuAsync(MenuConfigurationContext context)
     {
         var l = context.GetLocalizer<RemittanceManagementResource>();
-        var rootMenuItem = new ApplicationMenuItem("RemittanceManagement", l["Menu:RemittanceManagement"]);
-        var rootMenuItem = new ApplicationMenuItem("RemittanceManagement", l["Menu:RemittanceManagement"]);
-        var rootMenuItem = new ApplicationMenuItem("RemittanceManagement", l["Menu:RemittanceManagement"]);
-        var rootMenuItem = new ApplicationMenuItem("RemittanceManagement", l["Menu:RemittanceManagement"]);
-        var rootMenuItem = new ApplicationMenuItem("RemittanceManagement", l["Menu:RemittanceManagement"]);
-        var rootMenuItem = new ApplicationMenuItem("RemittanceManagement", l["Menu:RemittanceManagement"]);
+   
         if (await context.IsGrantedAsync(RemittanceManagementPermissions.Remittances.Default))
         {
             var rootMenuItem = new ApplicationMenuItem("RemittanceManagement", l["Menu:RemittanceManagement"]);
