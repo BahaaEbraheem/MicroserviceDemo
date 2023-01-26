@@ -8,7 +8,7 @@
             serverSide: true,
             paging: true,
             order: [[1, "asc"]],
-            searching: false,
+            searching: true,
             scrollX: true,
             processing: true,
             autoWidth: false,
@@ -20,17 +20,17 @@
         //    type: 'GET',
         //})),
         columnDefs: [
-                {
-                    rowAction: {
-                        items:
-                            [
-                                {
-                                    text: l('Release'),
+            //    {
+            //        rowAction: {
+            //            items:
+            //                [
+            //                    {
+            //                        text: l('Release'),
                                     
-                                },
-                            ]
-                    }
-            },
+            //                    },
+            //                ]
+            //        }
+            //},
             {
                 title: l('SerialNumber'),
                 data: "serialNumber"

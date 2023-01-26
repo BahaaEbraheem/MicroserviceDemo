@@ -25,7 +25,7 @@ public class CustomerManagementMenuContributor : IMenuContributor
             //Add main menu items.
             rootMenuItem.AddItem(new ApplicationMenuItem(CustomerManagementMenus.Prefix, displayName: l["Menu:CustomerManagement"], "~/CustomerManagement", icon: "fa fa-globe"));
         }
-        context.Menu.AddItem(rootMenuItem);
+        //context.Menu.AddItem(rootMenuItem);
         //Add main menu items.
 
     }
