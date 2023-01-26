@@ -14,23 +14,9 @@
             autoWidth: false,
             scrollCollapse: true,
             order: [[1, "desc"]],
-        ajax: abp.libs.datatables.createAjax(remittanceManagement.remittances.remittance.getListRemittancesStatus),
-        //ajax: abp.ajax($.extend(true, {
-        //    url: abp.appPath + 'api/remittanceManagement/remittance/GetListRemittancesStatusAsync' ,
-        //    type: 'GET',
-        //})),
+            ajax: abp.libs.datatables.createAjax(remittanceManagement.remittances.remittance.getListRemittancesStatus),
+        //    ajax: abp.libs.datatables.createAjax(remittanceManagement.remittances.remittance.getList),
         columnDefs: [
-            //    {
-            //        rowAction: {
-            //            items:
-            //                [
-            //                    {
-            //                        text: l('Release'),
-                                    
-            //                    },
-            //                ]
-            //        }
-            //},
             {
                 title: l('SerialNumber'),
                 data: "serialNumber"
@@ -54,10 +40,24 @@
             },
             {
                 title: l('ApprovedDate'),
-                data: "approvedDate"
+                data: "approvedDate",
+                render: function (data) {
+                    return luxon
+                        .DateTime
+                        .fromISO(data, {
+                            locale: abp.localization.currentCulture.name
+                        }).toLocaleString(luxon.DateTime.DATETIME_SHORT);
+                }
             },  {
                 title: l('ReleasedDate'),
-                data: "releasedDate"
+                data: "releasedDate",
+                render: function (data) {
+                    return luxon
+                        .DateTime
+                        .fromISO(data, {
+                            locale: abp.localization.currentCulture.name
+                        }).toLocaleString(luxon.DateTime.DATETIME_SHORT);
+                }
             }, {
                 title: l('SenderName'),
                 data: "senderName"

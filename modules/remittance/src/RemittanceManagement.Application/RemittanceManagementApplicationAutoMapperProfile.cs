@@ -17,15 +17,6 @@ public class RemittanceManagementApplicationAutoMapperProfile : Profile
     {
 
 
-        //    CreateMap<UserGroup, GroupYearsListDto>()
-        //.ForMember(
-        //    dest => dest.RegisteredYear,
-        //    opt => opt.MapFrom(src =>
-        //    {
-        //        IEnumerable<string> registeredYears = src.Group.GroupYears.Select(x => x.RegisteredYear);
-        //        return registeredYears.ToString();
-        //    })
-        //);
         CreateMap<Remittance, RemittanceDto>()
              .ForMember(model => model.SenderName, option => option.Ignore())
             .ForMember(model => model.ReceiverName, option => option.Ignore())

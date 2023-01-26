@@ -57,7 +57,7 @@ public class RemittanceController : RemittanceManagementController, IRemittanceA
     }
 
     [HttpGet]
-    [Route("GetListAsync")]
+    [Route("GetList")]
     public virtual async Task<PagedResultDto<RemittanceDto>> GetListAsync(GetRemittanceListDto input)
     {
         return await _remittanceAppService.GetListAsync(input);

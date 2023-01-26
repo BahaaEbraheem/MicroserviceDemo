@@ -35,50 +35,6 @@ namespace AmlManagement.Aml_Person
 
         }
 
-        //public async Task<AmlRemittance> FindBySerialNumAsync(string serialNum)
-        //{
-        //    var dbSet = await GetDbSetAsync();
-        //    return await dbSet.FirstOrDefaultAsync(Remittance => Remittance.SerialNumber == serialNum);
-        //}
-
-        //public async Task<bool> IsApprovedRemittanceAsync(AmlRemittance remittance)
-        //{
-        //    var dbSet = await GetDbSetAsync();
-        //    AmlRemittance checkApprovedRemittance = await dbSet.FirstOrDefaultAsync(Remittance => Remittance.Id == remittance.Id);
-        //    if (checkApprovedRemittance.ApprovedBy.Equals(null) && checkApprovedRemittance.ApprovedDate.Equals(null))
-        //    {
-        //        return true;
-        //    }
-        //    return false;
-
-        //}
-
-        //public async Task<List<AmlRemittance>> GetListRemittancesStatusAsync(int skipCount, int maxResultCount, string sorting, AmlRemittance filter)
-        //{
-        //    var dbSet = await GetDbSetAsync();
-
-        //    var remittances = await dbSet
-        //        .WhereIf(!filter.ReceiverFullName.IsNullOrWhiteSpace(), x => x.ReceiverFullName.Contains(filter.ReceiverFullName))
-        //        .WhereIf(!filter.Amount.Equals(0), x => x.Amount.ToString().Contains(filter.Amount.ToString()))
-        //        .WhereIf(!filter.TotalAmount.Equals(0), x => x.TotalAmount.ToString().Contains(filter.TotalAmount.ToString()))
-        //        .WhereIf(!filter.SerialNumber.IsNullOrWhiteSpace(), x => x.SerialNumber.Contains(filter.SerialNumber))
-        //        .OrderBy(sorting).Skip(skipCount).Take(maxResultCount).ToListAsync();
-        //    return remittances;
-
-        //}
-
-        //public async Task<int> GetTotalCountAsync(AmlRemittance filter)
-        //{
-        //    var dbSet = await GetDbSetAsync();
-        //    var remittances = await dbSet
-        //     .WhereIf(!filter.ReceiverFullName.IsNullOrWhiteSpace(), x => x.ReceiverFullName.Contains(filter.ReceiverFullName))
-        //        .WhereIf(!filter.Amount.Equals(0), x => x.Amount.ToString().Contains(filter.Amount.ToString()))
-        //        .WhereIf(!filter.TotalAmount.Equals(0), x => x.TotalAmount.ToString().Contains(filter.TotalAmount.ToString()))
-        //        .WhereIf(!filter.SerialNumber.IsNullOrWhiteSpace(), x => x.SerialNumber.Contains(filter.SerialNumber))
-        //        .ToListAsync();
-        //    return remittances.Count;
-        //}
-
 
 
 
