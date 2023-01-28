@@ -34,7 +34,6 @@ using AmlManagement.Permissions;
 namespace RemittanceManagement.Remittances;
 
 
-//[Authorize(RemittanceManagementPermissions.Remittances.Default)]
 public class RemittanceAppService : RemittanceManagementAppService ,IRemittanceAppService, ITransientDependency
 {
     private readonly IRemittanceRepository _remittanceRepository;
@@ -173,16 +172,6 @@ public class RemittanceAppService : RemittanceManagementAppService ,IRemittanceA
         {
             //Get the IQueryable<Remittance> from the repository
             var queryable =  _remittanceRepository.GetQueryableAsync().Result.Where(a=>a.Id==id);
-
-
-            //var currencyequeryable = GetCurrencyLookupAsync().Result.Items.AsQueryable().ToList();
-            ////Prepare a query to join remittances and currencies
-            //var query =( from remittance in queryable.AsQueryable()
-            //            //join currency in await _currencyAppService.GetQueryableAsync()
-            //            join currency in currencyequeryable
-            //on remittance.CurrencyId equals currency.Id
-            //            where remittance.Id == id
-            //            select new { remittance, currency }).ToList();
 
             //Execute the query and get the remittance with currency
           var queryResult = await AsyncExecuter.FirstOrDefaultAsync(queryable);
