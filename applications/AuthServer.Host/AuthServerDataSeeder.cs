@@ -240,7 +240,8 @@ namespace AuthServer.Host
               new[] { "InternalGateway" ,"IdentityService", "CustomerService", "CurrencyService", "AmlService" },
               new[] { "client_credentials" },
               commonSecret,
-              permissions: new[] { "CurrencyManagment.Currencies", "CustomerManagement.Customers" }
+              permissions: new[] { "RemittanceManagement.Remittance", "CurrencyManagment.Currencies",
+                  "CustomerManagement.Customers","AmlManagement.AmlRemittance" }
           );
             await CreateClientAsync(
             "currency-service-client",
@@ -261,7 +262,7 @@ namespace AuthServer.Host
             new[] { "InternalGateway", "IdentityService", "RemittanceService" },
             new[] { "client_credentials" },
             commonSecret,
-            permissions: new[] {  "RemittanceManagement.Remittance", "AmlManagement.AmlRemittance.Check" }
+             permissions: new[] { "AmlManagement.AmlRemittance", "RemittanceManagement.Remittance" }
         );
         }
 

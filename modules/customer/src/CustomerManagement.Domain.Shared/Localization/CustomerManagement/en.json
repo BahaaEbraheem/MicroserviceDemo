@@ -65,12 +65,11 @@
     "Enum:Gender:1": "Male",
     "Enum:Gender:2": "Female",
 
-
     "Enum:Remittance_Status:1": "Draft",
     "Enum:Remittance_Status:2": "Ready",
-    "Enum:Remittance_Status:3": "Approved",
-    "Enum:Remittance_Status:4": "Release",
-    "Enum:Remittance_Status:5": "AmlChecked",
+    "Enum:Remittance_Status:3": "CheckedAML",
+    "Enum:Remittance_Status:4": "Approved",
+    "Enum:Remittance_Status:5": "Release",
 
 
     //Customers

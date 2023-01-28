@@ -116,7 +116,7 @@ namespace CurrencyManagment.Currencies
             if ((existingCurrency != null && !existingCurrency.Name.Contains(input.Name))
                || (existingCurrency != null && !existingCurrency.Symbol.Contains(input.Symbol)))
             {
-                throw new CurrencyAlreadyExistsException(existingCurrency.Name);
+                throw new UserFriendlyException("Currency Exist Befor");
             }
             return await base.UpdateAsync(id, input);
         }

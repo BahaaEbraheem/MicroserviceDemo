@@ -33,8 +33,8 @@ using AmlManagement.Permissions;
 
 namespace RemittanceManagement.Remittances;
 
-//[Authorize(RemittanceManagementPermissions.Remittances.Default)]
 
+//[Authorize(RemittanceManagementPermissions.Remittances.Default)]
 public class RemittanceAppService : RemittanceManagementAppService ,IRemittanceAppService, ITransientDependency
 {
     private readonly IRemittanceRepository _remittanceRepository;
