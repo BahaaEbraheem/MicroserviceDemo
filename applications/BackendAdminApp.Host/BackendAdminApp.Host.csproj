@@ -34,11 +34,7 @@
         <PackageReference Include="Volo.Abp.TenantManagement.Web" Version="5.0.0" />
         <PackageReference Include="Volo.Abp.FeatureManagement.HttpApi.Client" Version="5.0.0" />
         <PackageReference Include="Volo.Blogging.Application.Contracts" Version="5.0.0" />
-
-
       <PackageReference Include="Volo.Abp.Http.Client.Web" Version="5.0.0" />
-
-
     
       <ProjectReference Include="..\..\modules\remittance\src\RemittanceManagement.HttpApi.Client\RemittanceManagement.HttpApi.Client.csproj" />
       <ProjectReference Include="..\..\modules\remittance\src\RemittanceManagement.Web\RemittanceManagement.Web.csproj" />
