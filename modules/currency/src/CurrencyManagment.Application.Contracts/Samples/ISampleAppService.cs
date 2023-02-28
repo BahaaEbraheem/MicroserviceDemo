@@ -1,7 +1,9 @@
-﻿using System.Threading.Tasks;
+﻿using System.ServiceModel;
+using System.Threading.Tasks;
 using Volo.Abp.Application.Services;
 
 namespace CurrencyManagment.Samples;
+[ServiceContract]
 
 public interface ISampleAppService : IApplicationService
 {

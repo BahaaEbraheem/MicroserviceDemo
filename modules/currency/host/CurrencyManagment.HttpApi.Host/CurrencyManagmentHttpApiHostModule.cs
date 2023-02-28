@@ -40,6 +40,9 @@ using MsDemo.Shared;
 using Autofac.Core;
 using Volo.Abp.Http.Client.IdentityModel;
 using RemittanceManagement.Remittances;
+using ProtoBuf.Grpc.Server;
+using CurrencyManagment.Currencies;
+using CurrencyManagment.Samples;
 
 namespace CurrencyManagment;
 
@@ -70,7 +73,7 @@ public class CurrencyManagmentHttpApiHostModule : AbpModule
         var hostingEnvironment = context.Services.GetHostingEnvironment();
 
         var configuration = context.Services.GetConfiguration();
-
+        context.Services.AddCodeFirstGrpc();
         Configure<AbpMultiTenancyOptions>(options =>
         {
             options.IsEnabled = MsDemoConsts.IsMultiTenancyEnabled;
@@ -140,7 +143,10 @@ public class CurrencyManagmentHttpApiHostModule : AbpModule
             options.SwaggerEndpoint("/swagger/v1/swagger.json", "Currency Managment API");
         });
         app.UseAuditing();
-        app.UseConfiguredEndpoints();
+        app.UseConfiguredEndpoints(endpoints =>
+        {
+            endpoints.MapGrpcService<ISampleAppService>();
+        });
         //TODO: Problem on a clustered environment
         AsyncHelper.RunSync(async () =>
         {

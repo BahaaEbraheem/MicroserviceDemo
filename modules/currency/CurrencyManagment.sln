@@ -31,6 +31,10 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CurrencyManagment.AuthServe
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CurrencyManagment.Host.Shared", "host\CurrencyManagment.Host.Shared\CurrencyManagment.Host.Shared.csproj", "{F6AC8D4A-EDD7-4514-8E8A-5BCB019864DB}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CurrencyManagment.HttpApi.Client.ConsoleTestApp", "test\CurrencyManagment.HttpApi.Client.ConsoleTestApp\CurrencyManagment.HttpApi.Client.ConsoleTestApp.csproj", "{DE796DDE-C3DB-423F-A531-D31ED0A04C21}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "test", "test", "{1A8AE0C4-5D54-44D8-B9F1-6ABC339247B0}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -85,6 +89,10 @@ Global
 		{F6AC8D4A-EDD7-4514-8E8A-5BCB019864DB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F6AC8D4A-EDD7-4514-8E8A-5BCB019864DB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F6AC8D4A-EDD7-4514-8E8A-5BCB019864DB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DE796DDE-C3DB-423F-A531-D31ED0A04C21}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DE796DDE-C3DB-423F-A531-D31ED0A04C21}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DE796DDE-C3DB-423F-A531-D31ED0A04C21}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DE796DDE-C3DB-423F-A531-D31ED0A04C21}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -102,6 +110,7 @@ Global
 		{73513786-B6C6-4A21-89C5-0FBDD0A46107} = {E400416D-2895-4512-9D17-90681EEC7E0A}
 		{690203F4-3CD5-4569-88D9-EE831EEA5F5F} = {E400416D-2895-4512-9D17-90681EEC7E0A}
 		{F6AC8D4A-EDD7-4514-8E8A-5BCB019864DB} = {E400416D-2895-4512-9D17-90681EEC7E0A}
+		{DE796DDE-C3DB-423F-A531-D31ED0A04C21} = {1A8AE0C4-5D54-44D8-B9F1-6ABC339247B0}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {4324B3B4-B60B-4E3C-91D8-59576B4E26DD}

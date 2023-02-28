@@ -18,18 +18,18 @@ public class ConsoleTestAppHostedService : IHostedService
 
     public async Task StartAsync(CancellationToken cancellationToken)
     {
-        using (var application = await AbpApplicationFactory.CreateAsync<CurrencyManagmentConsoleApiClientModule>(options =>
+        using (var application = AbpApplicationFactory.Create<CurrencyManagmentConsoleApiClientModule>(options =>
         {
-           options.Services.ReplaceConfiguration(_configuration);
-           options.UseAutofac();
+            options.Services.ReplaceConfiguration(_configuration);
+            options.UseAutofac();
         }))
         {
-            await application.InitializeAsync();
+            application.Initialize();
 
             var demo = application.ServiceProvider.GetRequiredService<ClientDemoService>();
             await demo.RunAsync();
 
-            await application.ShutdownAsync();
+            application.Shutdown();
         }
     }
 
